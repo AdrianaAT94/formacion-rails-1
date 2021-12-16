@@ -1,0 +1,141 @@
+.section {
+    padding-top: 4rem !important;
+}
+
+.button {
+    margin: 1rem 0;
+    a {
+        color: white;
+    }
+    a:hover {
+        color: white;
+    }
+}
+
+.formulario {
+    input {
+        width: 20%;
+    }
+    input[type='file'] {
+        width: auto;
+    }
+    label {
+        margin-top: 1rem;
+    }
+}
+
+.boton_form input {
+    background-color: #3e8ed0;
+    border-color: transparent;
+    border-width: 1px;
+    color: #fff;
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: calc(0.5em - 1px);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: calc(0.5em - 1px);
+    text-align: center;
+    white-space: nowrap;
+    -webkit-appearance: none;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.5em;
+    line-height: 1.5;
+    position: relative;
+    vertical-align: top;
+}
+
+.boton_form input :hover {
+    background-color: #3488ce;
+    border-color: transparent;
+    color: #fff;
+}
+
+#error_explanation {
+    color: red;
+}
+
+.column.producto {    
+    .nombre {
+        margin-top: 0.5rem;
+    }
+}
+
+.column.producto.desc {       
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 5rem 0;
+    text-align: center !important;
+}
+
+#product_image {
+    margin-top: 1rem;
+}
+
+#product_state {
+    padding: 1rem;
+}
+
+.desc_producto {
+    font-size: 1.5rem !important;
+}
+
+.producto .trix-content {
+    margin-bottom: 1rem;
+}
+
+.tiendas {
+    margin-top: 1rem;
+}
+
+.imagen_form img {
+    width: 30%;
+}
+
+.imagen {
+    height: 300px;
+    img {
+        height: 100%;
+    }
+}
+
+.productos {
+    margin-top: 2rem !important;
+    .producto {
+        border: 1px solid;
+        .nombre {
+            p {
+                border-top: 1px solid;
+            }
+        }
+    }
+    a {
+        color: black;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    
+    .navbar-menu.display {
+        display: flex;
+    }
+    
+    .formulario {
+        input {
+            width: 50%;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+       
+    .formulario {
+        input {
+            width: 100%;
+        }
+    }
+}

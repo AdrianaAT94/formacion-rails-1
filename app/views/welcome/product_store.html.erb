@@ -1,0 +1,39 @@
+<div class="container">
+   <h1 class="title is-1"><%= @product.name %></h1>
+   <h2 class="subtitle is-3"><%= @store.name %></h2>
+</div>   
+
+<div class="container">
+   <button class="button is-primary"><%= link_to 'Volver', productos_path(@store) %></button>
+</div>
+
+<div class="container">
+   
+   <div class="columns is-multiline is-mobile">      
+         <div class="column is-6-desktop is-12-mobile producto has-text-centered">
+            <% if @product.image.attached? %>               
+               <%= image_tag(@product.image, alt: 'Imagen') %>
+            <% end %>
+         </div>    
+         <div class="column is-6-desktop is-12-mobile producto desc has-text-left">               
+            <p class="is-size-6">Código de producto: <%= @product.reference %></p>
+            <p class="is-size-6">Descripción: <span class="desc_producto"><%= @product.description %></span></p>
+            <%= form_for([@store, @product]) do |f| %>  
+                <% if @product.sizes.present? %>
+                    <div data-controller="hello" class="field formulario">            
+                        <%= f.label :name, 'Talla' %>
+                        <select name="product[name]" id="product[name]" data-action="change->hello#precios" data-hello-target="valor">
+                           <%= @product.sizes.order(created_at: :asc).each do |size| %>
+                              <option value="<%= size.price %>"><%= size.name %></option>
+                           <% end %>
+                        </select>
+                        <p>Precio: <span data-hello-target="aparece"><%= @product.sizes.first.price %></span> €</p>
+                     </div>
+                     <div class="field boton_form">
+                        <%= f.submit 'Comprar' %>        
+                     </div>
+               <% end %>
+            <%end%>
+         </div>
+   </div>
+</div>

@@ -1,0 +1,33 @@
+<%= form_for @store do |f| %>
+    <% if @store.errors.any? %>
+        <div class="columns">
+            <div class="column" id="error_explanation">
+                <h2><%= pluralize(@store.errors.count, "error") %> guardando tienda:</h2>
+                <ul>
+                <% @store.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %> 
+                </ul>
+            </div>
+        </div>
+    <% end %>  
+    <div class="field formulario">
+        <div class="columns">
+            <div class="column">
+                <%= f.label :name, 'Nombre', class: 'label' %>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <%= f.text_field :name, class: 'input' %>
+            </div>
+        </div>  
+    </div>  
+    <div class="field boton_form">
+        <div class="columns">
+            <div class="column">
+                <%= f.submit 'Enviar' %>
+            </div>
+        </div>
+    </div>
+<% end %> 

@@ -1,0 +1,28 @@
+<div class="container">
+  <h1 class="title is-1"> Productos</h1>
+</div>
+     
+<div class="container productos">
+   
+   <div class="columns is-multiline is-mobile">
+      <% @products.order(created_at: :desc).first(8).each do |product| %>
+          <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
+            <%= link_to producto_path(product.store_id, product) do %>
+              <div class="imagen has-text-centered">
+                <% if product.image.attached? %>               
+                    <%= image_tag(product.image, alt: 'Imagen') %>
+                <% end %>
+              </div>
+              <div class="nombre has-text-centered">
+                <h3 class="title is-4"><%= product.name %></h3>
+                <% if product.sizes.present? %>
+                    <p>Precio: <span data-hello-target="aparece"><%= product.sizes.first.price %></span> €</p>
+                <% else %>               
+                    <p class="is-size-4"> . </p>
+                <% end %>
+              </div>
+              <% end %>
+          </div> 
+      <% end %>
+    </div>
+</div>

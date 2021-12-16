@@ -1,0 +1,11 @@
+<div class="container">
+  <h1 class="title is-1">Modificar producto de <%= @store.name %></</h1>
+</div>
+
+<div class="container">
+
+  <button class="button is-primary"><%= link_to 'Volver', store_product_path(@store, @product) %></button>
+
+  <%= render 'form' %>
+
+</div>

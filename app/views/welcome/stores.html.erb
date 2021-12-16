@@ -1,0 +1,15 @@
+<div class="container">
+   <h1 class="title is-1"> Tiendas</h1>
+</div>
+
+<div class="container">
+
+<table class="table is-bordered has-text-centered tiendas">
+
+   <% @stores.each do |store| %>
+      <tr>
+        <th><%= link_to store.name, productos_path(store) %></th>
+    </tr>
+   <% end %>
+</table>
+</div>

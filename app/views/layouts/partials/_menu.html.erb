@@ -1,0 +1,38 @@
+<nav data-controller="hello" data-hello-display-class="display" class="navbar is-fixed-top menu" role="navigation" aria-label="main navigation">
+  <div  class="navbar-brand">
+    <div class="navbar-item">
+      <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+    </div>
+    <div class="navbar-burger" data-action="click->hello#menumovil">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div data-hello-target="hide" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item">
+        <%= link_to 'Inicio', root_path %>
+      </div>
+      <% if user_signed_in? %>
+        <div class="navbar-item">
+          <%= link_to 'Tiendas', stores_path %>
+        </div>
+        <div class="navbar-item">
+          <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+        </div>
+      <% else %>
+        <div class="navbar-item">
+            <%= link_to 'Tiendas', tiendas_path %>
+        </div>
+        <div class="navbar-item">
+          <%= link_to 'Log in', new_user_session_path %>
+        </div>
+        <div class="navbar-item">
+          <%= link_to 'Registro', new_user_registration_path %>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</nav>

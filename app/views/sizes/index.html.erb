@@ -1,0 +1,14 @@
+<div class="container">
+  <h1 class="title is-1">Tallas del producto <%= @product.name %> de <%= @store.name %></h1>
+</div>
+
+<div class="container">
+
+  <button class="button is-primary"><%= link_to 'Volver', store_product_path(@store, @product) %></button>
+  <button class="button is-primary"><%= link_to 'Modificar producto', edit_store_product_path(@store, @product) %></button>
+  <button class="button is-primary"><%= link_to 'Eliminar producto', store_product_path(@store, @product), method: :delete, data: {confirm: 'Estas seguro?'} %></button>
+  <button class="button is-primary"><%= link_to 'Nueva talla', new_store_product_size_path(@store, @product) %></button>
+
+  <%= render 'products/sizes' %>
+
+  </div>

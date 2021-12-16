@@ -1,0 +1,90 @@
+<%= form_for([@store, @product]) do |f| %>
+   <% if @product.errors.any? %>
+         <div class="columns">
+            <div class="column" id="error_explanation">
+               <h2><%= pluralize(@product.errors.count, "error") %> guardando producto:</h2>
+               <ul>
+               <% @product.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+               <% end %> 
+               </ul>
+            </div>
+         </div>
+    <% end %>  
+    
+    <div class="field formulario">
+        <div class="columns">
+            <div class="column">
+                <%= f.label :name, 'Nombre', class: 'label' %>
+            </div>
+        </div>
+         <div class="columns">
+               <div class="column">
+                  <%= f.text_field :name, class: 'input' %>
+               </div>
+         </div>
+    </div> 
+
+    <div class="field formulario">
+        <div class="columns">
+            <div class="column">
+                <%= f.label :reference, 'Código de producto', class: 'label' %>
+            </div>
+        </div>
+         <div class="columns">
+               <div class="column">
+                  <%= f.text_field :reference, class: 'input' %>
+               </div>
+         </div>
+    </div> 
+
+    <div class="field formulario">
+        <div class="columns">
+            <div class="column">
+                <%= f.label :description, 'Descripción', class: 'label' %>
+            </div>
+        </div>
+         <div class="columns">
+               <div class="column">
+                  <%= f.rich_text_area :description, class: 'textarea' %>
+               </div>
+         </div>
+    </div> 
+
+    <div class="field formulario">
+        <div class="columns">
+            <div class="column imagen_form">
+                <% if @product.image.attached? %>               
+                  <%= image_tag(@product.image, alt: 'Imagen') %>
+                <% end %>
+            </div>
+        </div>
+         <div class="columns">
+            <div class="column is-1">
+               <%= f.label :image, 'Imagen', class: 'label' %>
+            </div>
+            <div class="column">
+               <%= f.file_field :image %>
+            </div>
+         </div>  
+    </div>
+
+    <div class="field formulario">
+        <div class="columns">
+            <div class="column is-1">
+                <%= f.label :state, 'Estado', class: 'label' %>
+            </div>
+            <div class="column">
+               <%= f.select :state, ['publicado', 'oculto'] %>
+            </div>
+        </div>  
+    </div> 
+       
+    <div class="field boton_form">
+        <div class="columns">
+            <div class="column">
+                <%= f.submit 'Enviar' %>
+            </div>
+        </div>
+    </div>
+<% end %> 

@@ -1,0 +1,25 @@
+<div class="columns is-multiline is-mobile">
+   <% @product.sizes.each do |size| %>
+      <div class="column is-12 tallas has-text-left">
+         <div class="talla">
+            <p class="is-size-6"><strong>Talla: </strong><%= size.name %></p>
+         </div>
+         <div class="referencia">
+            <p class="is-size-6"><strong>Referencia: </strong><%= size.reference %></p>
+         </div>
+         <div class="stock">
+            <p class="is-size-6"><strong>Stock: </strong><%= size.stock %></p>
+         </div>            
+         <div class="precio">
+            <p class="is-size-6"><strong>Precio: </strong><%= size.price %> €</p>
+         </div>           
+         <div class="opciones">
+            <p class="is-size-6">
+               <%= link_to 'Modificar talla', edit_store_product_size_path(@store, @product, size) %> | 
+               <%= link_to 'Eliminar talla', store_product_size_path(@store, @product, size), method: :delete, data: {confirm: 'Estas seguro?'} %>
+            </p>
+         </div>
+         <hr style="background-color: black;">
+      </div>
+   <% end %>
+</div>

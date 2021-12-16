@@ -1,0 +1,11 @@
+<div class="container">
+  <h1 class="title is-1">Modificar talla del producto <%= @product.name %> de la tienda <%= @store.name %></</h1>
+</div>
+
+<div class="container">
+
+  <button class="button is-primary"><%= link_to 'Volver', store_product_size_path(@store, @product, @size) %></button>
+
+  <%= render 'form' %>
+
+</div>

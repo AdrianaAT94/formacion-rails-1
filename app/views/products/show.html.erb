@@ -1,0 +1,42 @@
+<div class="container">
+   <h1 class="title is-1"><%= @product.name %></h1>
+   <h2 class="subtitle is-3"><%= @store.name %></h2>
+</div>   
+
+<div class="container">
+   <button class="button is-primary"><%= link_to 'Volver', store_path(@store) %></button>
+   <button class="button is-primary"><%= link_to 'Modificar producto', edit_store_product_path(@store, @product) %></button>
+   <button class="button is-primary"><%= link_to 'Eliminar producto', store_product_path(@store, @product), method: :delete, data: {confirm: 'Estas seguro?'} %></button>
+   <button class="button is-primary"><%= link_to 'Nueva talla', new_store_product_size_path(@store, @product) %></button>
+   <button class="button is-primary"><%= link_to 'Ver tallas', store_product_sizes_path(@store, @product) %></button>
+</div>
+
+<div class="container">
+
+   
+   <div class="columns is-multiline is-mobile">      
+         <div class="column is-6-desktop is-12-mobile producto has-text-centered">
+            <% if @product.image.attached? %>               
+               <%= image_tag(@product.image, alt: 'Imagen') %>
+            <% end %>
+         </div>    
+         <div class="column is-6-desktop is-12-mobile producto desc has-text-left">               
+            <p class="is-size-6">Código de producto: <%= @product.reference %></p>
+            <p class="is-size-6">Descripción: <span class="desc_producto"><%= @product.description %></span></p>
+            <%= form_for([@store, @product]) do |f| %>  
+               <% if @product.sizes.present? %>
+                  <div data-controller="hello" class="field formulario">            
+                     <%= f.label :name, 'Talla' %>
+                     <select name="product[name]" id="product[name]" data-action="change->hello#precios" data-hello-target="valor">
+                        <%= @product.sizes.order(created_at: :asc).each do |size| %>
+                           <option value="<%= size.price %>"><%= size.name %></option>
+                        <% end %>
+                     </select>
+                     <p>Precio: <span data-hello-target="aparece"><%= @product.sizes.first.price %></span> €</p>
+                  </div>
+               <% end %>
+            <% end %>
+            <p class="is-size-6">Estado: <%= @product.state %></p>
+         </div>
+   </div>
+</div>

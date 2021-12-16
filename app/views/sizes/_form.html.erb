@@ -1,0 +1,73 @@
+<%= form_for([@store, @product, @size]) do |f| %>
+    <% if @size.errors.any? %>
+         <div class="columns">
+            <div class="column" id="error_explanation">
+               <h2><%= pluralize(@size.errors.count, "error") %> guardando talla:</h2>
+               <ul>
+               <% @size.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+               <% end %> 
+            </div>
+        </div>
+    <% end %>   
+
+    <div class="field formulario">
+        <div class="columns">
+            <div class="column">
+                <%= f.label :name, 'Talla', class: 'label' %>
+            </div>
+        </div>
+         <div class="columns">
+               <div class="column">
+                  <%= f.text_field :name, class: 'input' %>
+               </div>
+         </div>
+    </div> 
+    
+    <div class="field formulario">
+        <div class="columns">
+            <div class="column">
+                <%= f.label :reference, 'Referencia', class: 'label' %>
+            </div>
+        </div>
+         <div class="columns">
+               <div class="column">
+                  <%= f.text_field :reference, class: 'input' %>
+               </div>
+         </div>
+    </div> 
+    
+    <div class="field formulario">
+        <div class="columns">
+            <div class="column">
+                <%= f.label :stock, 'Stock', class: 'label' %>
+            </div>
+        </div>
+         <div class="columns">
+               <div class="column">
+                  <%= f.text_field :stock, class: 'input' %>
+               </div>
+         </div>
+    </div> 
+    
+    <div class="field formulario">
+        <div class="columns">
+            <div class="column">
+                <%= f.label :price, 'Precio', class: 'label' %>
+            </div>
+        </div>
+         <div class="columns">
+               <div class="column">
+                  <%= f.text_field :price, class: 'input' %>
+               </div>
+         </div>
+    </div> 
+
+    <div class="field boton_form">
+        <div class="columns">
+            <div class="column">
+                <%= f.submit 'Enviar' %>
+            </div>
+        </div>
+    </div>
+<% end %> 

@@ -1,0 +1,35 @@
+<div class="container">
+  <h1 class="title is-1"><%= @store.name %></h1>
+  <h2 class="subtitle is-3">Productos</h2>
+</div>
+
+<div class="container">
+  <button class="button is-primary"><%= link_to 'Volver', tiendas_path %></button>
+</div>
+
+<div class="container productos">
+  <div class="columns is-multiline is-mobile">
+   <% @store.products.order(created_at: :desc).each do |product| %>
+      <% if product.state == 'publicado' %>
+        <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
+          <%= link_to producto_path(@store, product) do %>
+              <div class="imagen has-text-centered">
+                <% if product.image.attached? %>               
+                    <%= image_tag(product.image, alt: 'Imagen') %>
+                <% end %>
+              </div>
+              <div class="nombre has-text-centered">
+                <h3 class="title is-4"><%= product.name %></h3>
+                <% if product.sizes.present? %>
+                    <p>Precio: <span data-hello-target="aparece"><%= product.sizes.first.price %></span> €</p>
+                <% else %>               
+                    <p class="is-size-4"> . </p>
+                <% end %>
+              </div>
+          <% end %>
+        </div> 
+      <% end %>
+   <% end %>
+</div>
+
+</div>
