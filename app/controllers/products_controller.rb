@@ -37,6 +37,10 @@ class ProductsController < ApplicationController
         redirect_to store_path(@store)
     end
 
+    def delete_image {        
+        
+    }
+
     private
         def find_store
             @store = Store.find(params[:store_id])

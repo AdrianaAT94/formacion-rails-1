@@ -18,6 +18,8 @@
          <div class="column is-6-desktop is-12-mobile producto has-text-centered">
             <% if @product.image.attached? %>               
                <%= image_tag(@product.image, alt: 'Imagen') %>
+            <% else %>
+               <%= image_tag("noimage.jpg", alt: 'Imagen') %>
             <% end %>
          </div>    
          <div class="column is-6-desktop is-12-mobile producto desc has-text-left">               
