@@ -1,0 +1,11 @@
+https://prograils.com/rails-5-2-active-storage-new-approach-to-file-uploads
+subir varias fotos, e borrar unha ou varias, cambiar fotos
+acabar categorias
+acabar cancan
+carrito
+vista de todos os productos sin diferencia de tienda, pero podendo filtrar por categoria (scopes)
+gema view components
+codigo slider a stimulusjs
+maquetacion de deportesplus
+breadcrums
+select de talla con codigo ruby

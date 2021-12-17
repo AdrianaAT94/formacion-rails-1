@@ -53,17 +53,17 @@
     <div class="field formulario">
         <div class="columns">
             <div class="column imagen_form">
-                <% if @product.image.attached? %>               
+                <% if @product.images.attached? %>               
                   <%= image_tag(@product.image, alt: 'Imagen') %>
                 <% end %>
             </div>
         </div>
          <div class="columns">
             <div class="column is-1">
-               <%= f.label :image, 'Imagen', class: 'label' %>
+               <%= f.label :images, 'Imagen', class: 'label' %>
             </div>
             <div class="column">
-               <%= f.file_field :image %>
+               <%= f.file_field :images, multiple: true %>
             </div>
          </div>  
     </div>
