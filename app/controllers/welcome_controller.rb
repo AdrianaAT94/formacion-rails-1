@@ -6,10 +6,6 @@ class WelcomeController < ApplicationController
     @products = Product.all
   end
 
-  def stores
-    @stores = Store.all
-  end
-
   def products_store    
     @store = Store.find(params[:store_id])
   end

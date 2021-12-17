@@ -4,7 +4,7 @@
 </div>
 
 <div class="container">
-  <button class="button is-primary"><%= link_to 'Volver', tiendas_path %></button>
+  <%= link_to 'Volver', :back, class: 'button is-primary' %>
 </div>
 
 <div class="container productos">
@@ -14,7 +14,7 @@
         <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
           <%= link_to producto_path(@store, product) do %>
               <div class="imagen has-text-centered">
-                <% if product.image.attached? %>               
+                <% if product.image.present? %>               
                     <%= image_tag(product.image, alt: 'Imagen') %>
                 <% else %>
                   <%= image_tag("noimage.jpg", alt: 'Imagen') %>

@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
 
     def create
         @product = @store.products.create(product_params)
-        if @product.save 
+        if @product.save
             redirect_to store_path(@store)
         else
             render 'new'
@@ -37,9 +37,9 @@ class ProductsController < ApplicationController
         redirect_to store_path(@store)
     end
 
-    def delete_image {        
-        
-    }
+    def delete_image 
+    
+    end
 
     private
         def find_store

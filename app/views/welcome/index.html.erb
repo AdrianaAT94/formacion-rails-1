@@ -8,7 +8,7 @@
         <% @products.order(created_at: :desc).first(6).each do |product| %>
              <div class="swiper-slide">
                 <%= link_to producto_path(product.store_id, product) do %>  
-                  <% if product.image.attached? %>             
+                  <% if product.image.present? %>             
                       <%= image_tag(product.image, alt: 'Imagen') %>
                   <% else %>
                     <%= image_tag("noimage.jpg", alt: 'Imagen') %>
@@ -30,7 +30,7 @@
           <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
             <%= link_to producto_path(product.store_id, product) do %>
               <div class="imagen has-text-centered">
-                <% if product.image.attached? %>               
+                <% if product.image.present? %>               
                     <%= image_tag(product.image, alt: 'Imagen') %>
                 <% else %>
                   <%= image_tag("noimage.jpg", alt: 'Imagen') %>

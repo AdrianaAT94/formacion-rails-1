@@ -3,8 +3,7 @@
 </div>
 
 <div class="container">
-
-  <button class="button is-primary"><%= link_to 'Volver', store_product_path(@store, @product) %></button>
+  <%= link_to 'Volver', store_product_path(@store, @product), class: 'button is-primary' %>
 
   <%= render 'form' %>
 

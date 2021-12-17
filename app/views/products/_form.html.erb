@@ -49,14 +49,12 @@
                   <%= f.rich_text_area :description, class: 'textarea' %>
                </div>
          </div>
-    </div> 
-
+    </div>    
     <div class="field formulario">
         <div class="columns">
             <div class="column imagen_form">
                 <% if @product.image.attached? %>               
                   <%= image_tag(@product.image, alt: 'Imagen') %>
-                  <%#= button_tag delete, class: "button is-primary", data: {store_product_path(@store, @product), method: :delete, data: {confirm: 'Estas seguro?'}} %>
                 <% end %>
             </div>
         </div>

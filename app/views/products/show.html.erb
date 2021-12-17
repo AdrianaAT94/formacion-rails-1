@@ -4,11 +4,10 @@
 </div>   
 
 <div class="container">
-   <button class="button is-primary"><%= link_to 'Volver', store_path(@store) %></button>
-   <button class="button is-primary"><%= link_to 'Modificar producto', edit_store_product_path(@store, @product) %></button>
-   <button class="button is-primary"><%= link_to 'Eliminar producto', store_product_path(@store, @product), method: :delete, data: {confirm: 'Estas seguro?'} %></button>
-   <button class="button is-primary"><%= link_to 'Nueva talla', new_store_product_size_path(@store, @product) %></button>
-   <button class="button is-primary"><%= link_to 'Ver tallas', store_product_sizes_path(@store, @product) %></button>
+  <%= link_to 'Volver', store_products_path(@store), class: 'button is-primary' %>
+  <%= link_to 'Modificar producto', edit_store_product_path(@store, @product), class: 'button is-primary' %>
+  <%= link_to 'Eliminar producto', store_product_path(@store, @product), method: :delete, data: {confirm: 'Estas seguro?'}, class: 'button is-primary' %>
+  <%= link_to 'Ver tallas', store_product_sizes_path(@store, @product), class: 'button is-primary' %>
 </div>
 
 <div class="container">
@@ -16,7 +15,7 @@
    
    <div class="columns is-multiline is-mobile">      
          <div class="column is-6-desktop is-12-mobile producto has-text-centered">
-            <% if @product.image.attached? %>               
+            <% if @product.image.present? %>               
                <%= image_tag(@product.image, alt: 'Imagen') %>
             <% else %>
                <%= image_tag("noimage.jpg", alt: 'Imagen') %>

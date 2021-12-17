@@ -4,14 +4,14 @@
 </div>   
 
 <div class="container">
-   <button class="button is-primary"><%= link_to 'Volver', productos_path(@store) %></button>
+   <%= link_to 'Volver', :back, class: 'button is-primary' %>
 </div>
 
 <div class="container">
    
    <div class="columns is-multiline is-mobile">      
          <div class="column is-6-desktop is-12-mobile producto has-text-centered">
-            <% if @product.image.attached? %>               
+            <% if @product.image.present? %>               
                <%= image_tag(@product.image, alt: 'Imagen') %>
             <% else %>
                <%= image_tag("noimage.jpg", alt: 'Imagen') %>
