@@ -4,7 +4,7 @@
          <%= link_to store_product_path(@store, product) do %>
             <div class="imagen has-text-centered">
                <% if product.images.attached? %>             
-                  <%= image_tag(product.image, alt: 'Imagen') %>
+                  <%#= image_tag(product.image, alt: 'Imagen') %>
                <% else %>
                   <%= image_tag("noimage.jpg", alt: 'Imagen') %>
                <% end %>

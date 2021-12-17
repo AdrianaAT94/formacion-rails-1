@@ -12,7 +12,7 @@
    <div class="columns is-multiline is-mobile">      
          <div class="column is-6-desktop is-12-mobile producto has-text-centered">
             <% if @product.images.attached? %>                 
-               <%= image_tag(@product.image, alt: 'Imagen') %>
+               <%#= image_tag(@product.image, alt: 'Imagen') %>
             <% else %>
                <%= image_tag("noimage.jpg", alt: 'Imagen') %>
             <% end %>
