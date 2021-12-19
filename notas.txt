@@ -1,5 +1,6 @@
-https://prograils.com/rails-5-2-active-storage-new-approach-to-file-uploads
-subir varias fotos, e borrar unha ou varias, cambiar fotos
+poder cambiar a primeira foto
+validar fomato imagen, meter o de subir e faga redimensions
+cambiar imagen miniatura arriba producto o clickar
 acabar categorias
 acabar cancan
 carrito

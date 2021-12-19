@@ -37,8 +37,36 @@ class ProductsController < ApplicationController
         redirect_to store_path(@store)
     end
 
-    def delete_image 
+    def new_images
+    end
     
+    def create_images      
+        if params[:images].present?
+            params[:images].each do |image|
+                @product.images.attach(image)
+            end
+        end
+        redirect_to product_images_path(@store, @product) 
+    end
+
+    def show_images     
+    end
+
+    def delete_image     
+        @image = ActiveStorage::Attachment.find(params[:image_id])
+        @image.purge_later
+        redirect_to product_images_path(@store, @product) 
+    end
+
+    def edit_image
+        @image = ActiveStorage::Attachment.find(params[:image_id])
+    end
+
+    def update_image      
+        @image = ActiveStorage::Attachment.find(params[:image_id])
+        @image.purge_later
+        @product.images.attach(params[:image])
+        redirect_to product_images_path(@store, @product) 
     end
 
     private
@@ -51,6 +79,6 @@ class ProductsController < ApplicationController
         end
 
         def product_params
-            params.require(:product).permit(:name, :description, :reference, :state, images: [])
+            params.require(:product).permit(:name, :description, :reference, :state)
         end
 end

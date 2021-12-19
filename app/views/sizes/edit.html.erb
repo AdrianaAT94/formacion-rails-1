@@ -3,9 +3,6 @@
 </div>
 
 <div class="container">
-
-  <button class="button is-primary"><%= link_to 'Volver', store_product_size_path(@store, @product, @size) %></button>
-
+  <%= link_to 'Volver', store_product_size_path(@store, @product, @size), class: 'button is-primary' %>
   <%= render 'form' %>
-
 </div>

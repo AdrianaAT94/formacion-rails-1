@@ -1,0 +1,42 @@
+<div class="container">
+  <h1 class="title is-1">Nueva imagen del producto de <%= @store.name %></</h1>
+</div>
+
+<div class="container">
+    <%= link_to 'Volver', product_images_path(@store, @product), class: 'button is-primary' %>
+
+    <%= form_tag ({:controller => "products", :action => "create_images"}), :enctype =>"multipart/form-data" do %>
+      <% if @product.errors.any? %>
+              <div class="columns">
+                 <div class="column" id="error_explanation">
+                    <h2><%= pluralize(@product.errors.count, "error") %> guardando producto:</h2>
+                    <ul>
+                    <% @product.errors.full_messages.each do |msg| %>
+                       <li><%= msg %></li>
+                    <% end %> 
+                    </ul>
+                 </div>
+              </div>
+         <% end %>  
+           
+         <div class="field formulario">
+              <div class="columns">
+                 <div class="column is-1">
+                    <%= label_tag :images, 'Imagen', class: 'label' %>
+                 </div>
+                 <div class="column">
+                    <%= file_field_tag 'images[]', multiple: true %>
+                 </div>
+              </div>  
+         </div>
+            
+         <div class="field boton_form">
+             <div class="columns">
+                 <div class="column">
+                     <%= submit_tag 'Enviar' %>
+                 </div>
+             </div>
+         </div>
+     <% end %>     
+
+</div>

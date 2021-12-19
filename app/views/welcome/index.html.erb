@@ -7,13 +7,13 @@
       <div class="swiper-wrapper">
         <% @products.order(created_at: :desc).first(6).each do |product| %>
              <div class="swiper-slide">
-                <%= link_to producto_path(product.store_id, product) do %>  
-                  <% if product.images.attached? %>             
-                    <%#= image_tag(product.image, alt: 'Imagen') %>
+                <%= link_to producto_path(product.store_id, product) do %>
+                  <% if product.images.attached? %>   
+                      <%= image_tag(product.images.first, alt: 'Imagen') %>
                   <% else %>
-                    <%= image_tag("noimage.jpg", alt: 'Imagen') %>
-                  <% end %>
-                <% end %>
+                      <%= image_tag("noimage.jpg", alt: 'Imagen') %>
+                  <% end %> 
+                    <% end %>
               </div>
         <% end %>
       </div>
@@ -30,11 +30,11 @@
           <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
             <%= link_to producto_path(product.store_id, product) do %>
               <div class="imagen has-text-centered">
-                <% if product.images.attached? %>             
-                    <%#= image_tag(product.images, alt: 'Imagen') %>
+                <% if product.images.attached? %>   
+                    <%= image_tag(product.images.first, alt: 'Imagen') %>
                 <% else %>
-                  <%= image_tag("noimage.jpg", alt: 'Imagen') %>
-                <% end %>
+                    <%= image_tag("noimage.jpg", alt: 'Imagen') %>
+                <% end %> 
               </div>
               <div class="nombre has-text-centered">
                 <h3 class="title is-4"><%= product.name %></h3>

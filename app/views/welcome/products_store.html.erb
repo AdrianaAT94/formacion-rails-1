@@ -14,11 +14,11 @@
         <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
           <%= link_to producto_path(@store, product) do %>
               <div class="imagen has-text-centered">
-                <% if product.images.attached? %>          
-                    <%#= image_tag(product.images, alt: 'Imagen') %>
+                <% if product.images.attached? %>   
+                    <%= image_tag(product.images.first, alt: 'Imagen') %>
                 <% else %>
-                  <%= image_tag("noimage.jpg", alt: 'Imagen') %>
-                <% end %>
+                    <%= image_tag("noimage.jpg", alt: 'Imagen') %>
+                <% end %> 
               </div>
               <div class="nombre has-text-centered">
                 <h3 class="title is-4"><%= product.name %></h3>

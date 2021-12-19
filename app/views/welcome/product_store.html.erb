@@ -11,11 +11,22 @@
    
    <div class="columns is-multiline is-mobile">      
          <div class="column is-6-desktop is-12-mobile producto has-text-centered">
-            <% if @product.images.attached? %>                 
-               <%#= image_tag(@product.image, alt: 'Imagen') %>
-            <% else %>
-               <%= image_tag("noimage.jpg", alt: 'Imagen') %>
-            <% end %>
+            <div class="columns is-multiline is-mobile">
+               <div class="column is-12-desktop is-12-mobile imagen">
+                  <% if @product.images.attached? %>   
+                     <%= image_tag(@product.images.first, alt: 'Imagen') %>
+                  <% else %>
+                     <%= image_tag("noimage.jpg", alt: 'Imagen') %>
+                  <% end %> 
+               </div>
+               <div class="column is-12-desktop is-12-mobile miniaturas">
+                  <% if @product.images.attached? %>    
+                     <% @product.images.each do |image| %>           
+                        <%= image_tag(image, alt: 'Imagen') %>
+                     <% end %>
+                  <% end %>
+               </div>
+            </div>
          </div>    
          <div class="column is-6-desktop is-12-mobile producto desc has-text-left">               
             <p class="is-size-6">Código de producto: <%= @product.reference %></p>
