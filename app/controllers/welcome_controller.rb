@@ -1,9 +1,21 @@
 class WelcomeController < ApplicationController
   skip_before_action :authenticate_user!
-  #before_action :oculto
+  before_action :oculto, only: [:product_store]
 
   def index
     @products = Product.all
+  end
+
+  def stores
+    @stores = Store.all
+  end
+
+  def products
+    @products = Product.all
+  end
+
+  def product
+    @product = Product.find(params[:product_id])
   end
 
   def products_store    

@@ -1,10 +1,9 @@
 poder cambiar a primeira foto
 validar fomato imagen, meter o de subir e faga redimensions
 cambiar imagen miniatura arriba producto o clickar
-acabar categorias
+acabar categorias, filtrar
 acabar cancan
 carrito
-vista de todos os productos sin diferencia de tienda, pero podendo filtrar por categoria (scopes)
 gema view components
 codigo slider a stimulusjs
 maquetacion de deportesplus

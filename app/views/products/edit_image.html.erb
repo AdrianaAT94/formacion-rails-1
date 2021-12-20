@@ -3,7 +3,7 @@
 </div>
 
 <div class="container">
-    <%= link_to 'Volver', product_images_path(@store, @product), class: 'button is-primary' %>
+    <%= link_to 'Volver a imágenes', product_images_path(@store, @product), class: 'button is-primary' %>
 
     <%= form_tag ({:controller => "products", :action => "update_image"}), :enctype =>"multipart/form-data" do %>
       <% if @product.errors.any? %>

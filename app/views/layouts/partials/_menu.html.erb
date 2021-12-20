@@ -14,12 +14,18 @@
 
   <div data-hello-target="hide" class="navbar-menu">
     <div class="navbar-start">
-      <div class="navbar-item">
-        <%= link_to 'Inicio', root_path %>
-      </div>
+        <div class="navbar-item">
+          <%= link_to 'Inicio', root_path %>
+        </div>
+        <div class="navbar-item">
+          <%= link_to 'Tiendas', tiendas_path %>
+        </div>
+        <div class="navbar-item">
+          <%= link_to 'Productos', productos_path %>
+        </div>
       <% if user_signed_in? %>
         <div class="navbar-item">
-          <%= link_to 'Tiendas', stores_path %>
+          <%= link_to 'Admin', stores_path %>
         </div>
         <div class="navbar-item">
           <%= link_to 'Log out', destroy_user_session_path, method: :delete %>

@@ -9,9 +9,12 @@ Rails.application.routes.draw do
   end
 
   root :to => "welcome#index"
+  get 'tiendas', to: 'welcome#stores', as: :tiendas
   get 'tiendas/:store_id', to: 'welcome#products_store', as: :tienda
-  get 'tiendas/:store_id/productos', to: 'welcome#products_store', as: :productos
-  get 'tiendas/:store_id/productos/:product_id', to: 'welcome#product_store', as: :producto
+  get 'productos', to: 'welcome#products', as: :productos
+  get 'productos/:product_id', to: 'welcome#product', as: :producto
+  get 'tiendas/:store_id/productos', to: 'welcome#products_store', as: :productos_tiendas
+  get 'tiendas/:store_id/productos/:product_id', to: 'welcome#product_store', as: :producto_tienda
 
   get 'stores/:store_id/products/:id/images', to: 'products#show_images', as: :product_images
   get 'stores/:store_id/products/:id/images/new_images', to: 'products#new_images', as: :new_product_images

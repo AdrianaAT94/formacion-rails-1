@@ -1,18 +1,17 @@
 <div class="container">
-  <h1 class="title is-1"><%= @store.name %></h1>
   <h2 class="subtitle is-3">Productos</h2>
 </div>
 
 <div class="container">
-  <%= link_to 'Volver a tiendas', tiendas_path, class: 'button is-primary' %>
+  <%= link_to 'Volver a inicio', root_path, class: 'button is-primary' %>
 </div>
 
 <div class="container productos">
   <div class="columns is-multiline is-mobile">
-   <% @store.products.order(created_at: :desc).each do |product| %>
+   <% @products.order(created_at: :desc).each do |product| %>
       <% if product.state == 'publicado' %>
         <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
-          <%= link_to producto_tienda_path(@store, product) do %>
+          <%= link_to producto_path(product) do %>
               <div class="imagen has-text-centered">
                 <% if product.images.attached? %>   
                     <%= image_tag(product.images.first, alt: 'Imagen') %>

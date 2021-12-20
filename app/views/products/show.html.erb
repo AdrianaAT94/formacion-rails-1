@@ -4,7 +4,7 @@
 </div>   
 
 <div class="container">
-  <%= link_to 'Volver', store_products_path(@store), class: 'button is-primary' %>
+  <%= link_to 'Volver a tienda', store_products_path(@store), class: 'button is-primary' %>
   <%= link_to 'Modificar producto', edit_store_product_path(@store, @product), class: 'button is-primary' %>
   <%= link_to 'Eliminar producto', store_product_path(@store, @product), method: :delete, data: {confirm: 'Estas seguro?'}, class: 'button is-primary' %>
   <%= link_to 'Ver tallas', store_product_sizes_path(@store, @product), class: 'button is-primary' %>
