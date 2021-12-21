@@ -72,7 +72,7 @@
     text-align: center !important;
 }
 
-#images_, #image {
+#images_, #image, #slider_image {
     margin-top: 1rem;
 }
 
@@ -112,6 +112,13 @@
     a {
         color: black;
     }
+}
+
+.opciones_slider {       
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 5rem 0 !important;
+    text-align: center !important;
+    margin: 1rem 0;
 }
 
 .slider{
