@@ -72,7 +72,7 @@
     text-align: center !important;
 }
 
-#product_image {
+#images_, #image {
     margin-top: 1rem;
 }
 
@@ -92,14 +92,10 @@
     margin-top: 1rem;
 }
 
-.imagen_form img {
-    width: 30%;
-}
-
-.imagen {
-    height: 300px;
+.miniaturas {
     img {
-        height: 100%;
+        border: 1px solid;
+        padding: 10px;
     }
 }
 
@@ -118,16 +114,14 @@
     }
 }
 
-.swiper {
-    width: 100%;
-    height: 100%;
-  }
+   .swiper {
+        width: 100%;
+        height: 100%;
+   }
 
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
-
     /* Center slide text vertically */
     display: -webkit-box;
     display: -ms-flexbox;
@@ -141,11 +135,13 @@
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
+    height: 300px !important;
   }
 
   .swiper-slide img {
     display: block;
-    width: 100%;
+    width: 50%;
+    margin: 0 auto;
     height: 100%;
     object-fit: cover;
   }

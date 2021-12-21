@@ -3,6 +3,7 @@ class SizesController < ApplicationController
     before_action :find_size, only: [:edit, :update, :delete, :destroy]
 
     def index
+        @product_sizes = @product.sizes.order(created_at: :desc)
     end
     
     def new

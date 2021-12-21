@@ -1,0 +1,53 @@
+<div class="container">
+  <h1 class="title is-1">Nueva imagen del producto de <%= @store.name %></</h1>
+</div>
+
+<div class="container">
+    <%= link_to 'Volver a imágenes', product_images_path(@store, @product), class: 'button is-primary' %>
+
+    <%= form_tag ({:controller => "products", :action => "update_image"}), :enctype =>"multipart/form-data" do %>
+      <% if @product.errors.any? %>
+              <div class="columns">
+                 <div class="column" id="error_explanation">
+                    <h2><%= pluralize(@product.errors.count, "error") %> guardando imagen:</h2>
+                    <ul>
+                    <% @product.errors.full_messages.each do |msg| %>
+                       <li><%= msg %></li>
+                    <% end %> 
+                    </ul>
+                 </div>
+              </div>
+         <% end %>  
+           
+         <div class="field formulario">
+            <div class="columns">
+                  <div class="column imagen_form">
+                     <% if @product.images.attached? %>               
+                        <% @product.images.each do |image| %>   
+                           <% if @image.id == image.id %>
+                              <%= image_tag(image.variant(:medium), alt: 'Imagen') %>
+                           <% end %>         
+                        <% end %>
+                     <% end %>
+                  </div>
+            </div>
+            <div class="columns">
+               <div class="column is-1">
+                  <%= label_tag :image, 'Imagen', class: 'label' %>
+               </div>
+               <div class="column">
+                  <%= file_field_tag 'image' %>
+               </div>
+            </div>  
+         </div>
+            
+         <div class="field boton_form">
+             <div class="columns">
+                 <div class="column">
+                     <%= submit_tag 'Enviar' %>
+                 </div>
+             </div>
+         </div>
+     <% end %>     
+
+</div>

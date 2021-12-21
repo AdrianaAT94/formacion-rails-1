@@ -19,6 +19,7 @@ class StoresController < ApplicationController
     end
 
     def show
+        @store_products = @store.products.order(created_at: :desc)
     end
 
     def edit 

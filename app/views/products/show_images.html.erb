@@ -1,0 +1,31 @@
+<div class="container">
+  <h1 class="title is-1">Imágenes del producto <%= @product.name %> de <%= @store.name %></h1>
+</div>
+
+<div class="container">
+
+  <%= link_to 'Volver a producto', store_product_path(@store, @product), class: 'button is-primary' %>
+  <%= link_to 'Nueva imagen', new_product_images_path(@store, @product), class: 'button is-primary' %>
+
+  <div class="columns is-multiline is-mobile">
+    <% if @product.images.attached? %>  
+        <% @product.images.each do |image| %>    
+            <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
+                <div class="imagen has-text-centered">       
+                    <%= image_tag(image.variant(:medium), alt: 'Imagen') %>
+                </div>     
+                <div class="opciones">
+                   <p class="is-size-6">
+                      <%= link_to 'Modificar imagen', edit_product_image_path(@store, @product, image) %> | 
+                      <%= link_to 'Eliminar imagen', delete_product_image_path(@store, @product, image), method: :delete, data: {confirm: 'Estas seguro?'} %> |                     
+                      <% if image.main == false %>  
+                        <%= link_to 'Hacer principal', product_image_principal_path(@store, @product, image) %>
+                      <% end %>
+                   </p>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+    </div>
+
+</div>

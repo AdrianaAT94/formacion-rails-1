@@ -4,19 +4,29 @@
 </div>
 
 <div class="container">
-  <button class="button is-primary"><%= link_to 'Volver', tiendas_path %></button>
+  <%= link_to 'Volver a tiendas', tiendas_path, class: 'button is-primary' %>
 </div>
 
 <div class="container productos">
   <div class="columns is-multiline is-mobile">
-   <% @store.products.order(created_at: :desc).each do |product| %>
+   <% @store_products.each do |product| %>
       <% if product.state == 'publicado' %>
         <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
-          <%= link_to producto_path(@store, product) do %>
+          <%= link_to producto_tienda_path(@store, product) do %>
               <div class="imagen has-text-centered">
-                <% if product.image.attached? %>               
-                    <%= image_tag(product.image, alt: 'Imagen') %>
-                <% end %>
+                <% if product.images.attached? %>
+                  <% if product.images.where(main: true).count > 0 %>
+                    <% product.images.each do |image| %> 
+                      <% if image.main == true %>   
+                        <%= image_tag(image.variant(:medium), alt: 'Imagen') %>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                      <%= image_tag(product.images.first.variant(:medium), alt: 'Imagen') %>
+                  <% end %>
+                <% else %>
+                    <%= image_tag("noimage.jpg", alt: 'Imagen') %>
+                <% end %> 
               </div>
               <div class="nombre has-text-centered">
                 <h3 class="title is-4"><%= product.name %></h3>

@@ -1,17 +1,17 @@
 <div class="columns is-multiline is-mobile">
-   <% @product.sizes.each do |size| %>
+   <% @product_sizes.each do |size| %>
       <div class="column is-12 tallas has-text-left">
          <div class="talla">
-            <p class="is-size-6"><strong>Talla: </strong><%= size.name %></p>
+            <p class="is-size-6"><b>Talla: </b><%= size.name %></p>
          </div>
          <div class="referencia">
-            <p class="is-size-6"><strong>Referencia: </strong><%= size.reference %></p>
+            <p class="is-size-6"><b>Referencia: </b><%= size.reference %></p>
          </div>
          <div class="stock">
-            <p class="is-size-6"><strong>Stock: </strong><%= size.stock %></p>
+            <p class="is-size-6"><b>Stock: </b><%= size.stock %></p>
          </div>            
          <div class="precio">
-            <p class="is-size-6"><strong>Precio: </strong><%= size.price %> €</p>
+            <p class="is-size-6"><b>Precio: </b><%= size.price %> €</p>
          </div>           
          <div class="opciones">
             <p class="is-size-6">

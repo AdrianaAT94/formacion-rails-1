@@ -1,0 +1,56 @@
+<div class="container">
+   <h1 class="title is-1"><%= @product.name %></h1>
+</div>   
+
+<div class="container">
+   <%= link_to 'Volver a inicio', root_path, class: 'button is-primary' %>
+</div>
+    
+<% if @product.state == 'publicado' %>
+   <div class="container">      
+      <div class="columns is-multiline is-mobile">      
+            <div class="column is-6-desktop is-12-mobile producto has-text-centered">
+               <div class="columns is-multiline is-mobile">
+                  <div class="column is-12-desktop is-12-mobile imagen">
+                     <% if @product.images.attached? %>
+                        <% if @product.images.where(main: true).count > 0 %>
+                           <% @product.images.each do |image| %> 
+                              <% if image.main == true %>   
+                                 <%= image_tag(image.variant(:medium), alt: 'Imagen') %>
+                              <% end %>
+                           <% end %>
+                        <% else %>
+                           <%= image_tag(@product.images.first.variant(:medium), alt: 'Imagen') %>
+                        <% end %>
+                     <% else %>
+                     <%= image_tag("noimage.jpg", alt: 'Imagen') %>
+                     <% end %>  
+                  </div>
+                  <div class="column is-12-desktop is-12-mobile miniaturas">
+                     <% if @product.images.attached? %>    
+                        <% @product.images.each do |image| %>           
+                           <%= image_tag(image.variant(:thumb), alt: 'Imagen') %>
+                        <% end %>
+                     <% end %>
+                  </div>
+               </div>
+            </div>    
+            <div class="column is-6-desktop is-12-mobile producto desc has-text-left">               
+               <p class="is-size-6">Código de producto: <%= @product.reference %></p>
+               <p class="is-size-6">Descripción: <span class="desc_producto"><%= @product.description %></span></p>
+               <%= form_tag({}, {:method => :get}) do |f| %>  
+                  <% if @product_sizes.present? %>
+                     <div data-controller="hello" class="field formulario">            
+                           <%= label_tag :name, 'Talla' %>
+                           <%= select_tag 'sizes', options_for_select(@product_sizes.collect{ |u| [u.name, u.price] }), data: {action: "change->hello#precios", target: "hello.valor" } %>
+                           <p>Precio: <span data-hello-target="aparece"><%= @product_sizes.first.price %></span> €</p>
+                        </div>
+                        <div class="field boton_form">
+                           <%= submit_tag 'Comprar' %>        
+                        </div>
+                  <% end %>
+               <%end%>
+            </div>
+      </div>
+   </div>
+<% end %>

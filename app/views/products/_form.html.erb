@@ -49,25 +49,7 @@
                   <%= f.rich_text_area :description, class: 'textarea' %>
                </div>
          </div>
-    </div> 
-
-    <div class="field formulario">
-        <div class="columns">
-            <div class="column imagen_form">
-                <% if @product.image.attached? %>               
-                  <%= image_tag(@product.image, alt: 'Imagen') %>
-                <% end %>
-            </div>
-        </div>
-         <div class="columns">
-            <div class="column is-1">
-               <%= f.label :image, 'Imagen', class: 'label' %>
-            </div>
-            <div class="column">
-               <%= f.file_field :image %>
-            </div>
-         </div>  
-    </div>
+    </div>    
 
     <div class="field formulario">
         <div class="columns">

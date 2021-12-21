@@ -9,6 +9,10 @@ gem "bulma-rails", "~> 0.9.2"
 # Authentication
 gem 'devise' 
 
+gem "active_storage_variant"
+gem 'image_processing', '~> 1.2'
+gem 'active_storage_validations'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
 # Use sqlite3 as the database for Active Record

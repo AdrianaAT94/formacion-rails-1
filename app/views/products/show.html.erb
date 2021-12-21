@@ -4,11 +4,11 @@
 </div>   
 
 <div class="container">
-   <button class="button is-primary"><%= link_to 'Volver', store_path(@store) %></button>
-   <button class="button is-primary"><%= link_to 'Modificar producto', edit_store_product_path(@store, @product) %></button>
-   <button class="button is-primary"><%= link_to 'Eliminar producto', store_product_path(@store, @product), method: :delete, data: {confirm: 'Estas seguro?'} %></button>
-   <button class="button is-primary"><%= link_to 'Nueva talla', new_store_product_size_path(@store, @product) %></button>
-   <button class="button is-primary"><%= link_to 'Ver tallas', store_product_sizes_path(@store, @product) %></button>
+  <%= link_to 'Volver a tienda', store_products_path(@store), class: 'button is-primary' %>
+  <%= link_to 'Modificar producto', edit_store_product_path(@store, @product), class: 'button is-primary' %>
+  <%= link_to 'Eliminar producto', store_product_path(@store, @product), method: :delete, data: {confirm: 'Estas seguro?'}, class: 'button is-primary' %>
+  <%= link_to 'Ver tallas', store_product_sizes_path(@store, @product), class: 'button is-primary' %>
+  <%= link_to 'Ver imágenes', product_images_path(@store, @product), class: 'button is-primary' %>
 </div>
 
 <div class="container">
@@ -16,23 +16,40 @@
    
    <div class="columns is-multiline is-mobile">      
          <div class="column is-6-desktop is-12-mobile producto has-text-centered">
-            <% if @product.image.attached? %>               
-               <%= image_tag(@product.image, alt: 'Imagen') %>
-            <% end %>
+            <div class="columns is-multiline is-mobile">
+               <div class="column is-12-desktop is-12-mobile imagen">
+                  <% if @product.images.attached? %>
+                     <% if @product.images.where(main: true).count > 0 %>
+                        <% @product.images.each do |image| %> 
+                           <% if image.main == true %>   
+                              <%= image_tag(image.variant(:medium), alt: 'Imagen') %>
+                           <% end %>
+                        <% end %>
+                     <% else %>
+                        <%= image_tag(@product.images.first.variant(:medium), alt: 'Imagen') %>
+                     <% end %>
+                  <% else %>
+                    <%= image_tag("noimage.jpg", alt: 'Imagen') %>
+                  <% end %>
+               </div>
+               <div class="column is-12-desktop is-12-mobile miniaturas">
+                  <% if @product.images.attached? %>    
+                     <% @product.images.each do |image| %>           
+                        <%= image_tag(image.variant(:thumb), alt: 'Imagen') %>
+                     <% end %>
+                  <% end %>
+               </div>
+            </div>
          </div>    
          <div class="column is-6-desktop is-12-mobile producto desc has-text-left">               
             <p class="is-size-6">Código de producto: <%= @product.reference %></p>
             <p class="is-size-6">Descripción: <span class="desc_producto"><%= @product.description %></span></p>
             <%= form_for([@store, @product]) do |f| %>  
-               <% if @product.sizes.present? %>
+               <% if @product_sizes.present? %>
                   <div data-controller="hello" class="field formulario">            
                      <%= f.label :name, 'Talla' %>
-                     <select name="product[name]" id="product[name]" data-action="change->hello#precios" data-hello-target="valor">
-                        <%= @product.sizes.order(created_at: :asc).each do |size| %>
-                           <option value="<%= size.price %>"><%= size.name %></option>
-                        <% end %>
-                     </select>
-                     <p>Precio: <span data-hello-target="aparece"><%= @product.sizes.first.price %></span> €</p>
+                     <%= select_tag 'sizes', options_for_select(@product_sizes.collect{ |u| [u.name, u.price] }), data: {action: "change->hello#precios", target: "hello.valor" } %>
+                     <p>Precio: <span data-hello-target="aparece"><%= @product_sizes.first.price %></span> €</p>
                   </div>
                <% end %>
             <% end %>

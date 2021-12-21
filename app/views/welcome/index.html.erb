@@ -1,47 +1,59 @@
 <div class="container">
   <h1 class="title is-1"> Productos</h1>
-  <h3> Hola mundo </h3>
 </div>
 
-<div class=="container">
-  <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">Slide 1</div>
-        <div class="swiper-slide">Slide 2</div>
-        <div class="swiper-slide">Slide 3</div>
-        <div class="swiper-slide">Slide 4</div>
-        <div class="swiper-slide">Slide 5</div>
-        <div class="swiper-slide">Slide 6</div>
-        <div class="swiper-slide">Slide 7</div>
-        <div class="swiper-slide">Slide 8</div>
-        <div class="swiper-slide">Slide 9</div>
-      </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+<div class="container">
+  <div data-controller="slideshow">
+    <div data-slideshow-target="slide">
+        <%= image_tag("https://wikiki.github.io/images/merry-christmas.jpg", alt: 'Imagen') %>
     </div>
+    <div data-slideshow-target="slide">
+        <%= image_tag("https://wikiki.github.io/images/singer.jpg", alt: 'Imagen') %>
+    </div>
+    <div data-slideshow-target="slide">
+        <%= image_tag("https://wikiki.github.io/images/sushi.jpg", alt: 'Imagen') %>
+    </div>
+    <div data-slideshow-target="slide">
+        <%= image_tag("https://wikiki.github.io/images/life.jpg", alt: 'Imagen') %>
+    </div>
+    <button data-action="slideshow#previous"> ← </button>
+    <button data-action="slideshow#next"> → </button>
+  </div>
 </div>
      
 <div class="container productos">
    
    <div class="columns is-multiline is-mobile">
-      <% @products.order(created_at: :desc).first(8).each do |product| %>
-          <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
-            <%= link_to producto_path(product.store_id, product) do %>
-              <div class="imagen has-text-centered">
-                <% if product.image.attached? %>               
-                    <%= image_tag(product.image, alt: 'Imagen') %>
+      <% @products.first(8).each do |product| %>      
+          <% if product.state == 'publicado' %>
+            <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
+              <%= link_to producto_path(product) do %>
+                <div class="imagen has-text-centered">
+                  <% if product.images.attached? %>
+                    <% if product.images.where(main: true).count > 0 %>
+                      <% product.images.each do |image| %> 
+                        <% if image.main == true %>   
+                          <%= image_tag(image.variant(:medium), alt: 'Imagen') %>
+                        <% end %>
+                      <% end %>
+                    <% else %>
+                        <%= image_tag(product.images.first.variant(:medium), alt: 'Imagen') %>
+                    <% end %>
+                  <% else %>
+                      <%= image_tag("noimage.jpg", alt: 'Imagen') %>
+                  <% end %>  
+                </div>
+                <div class="nombre has-text-centered">
+                  <h3 class="title is-4"><%= product.name %></h3>
+                  <% if product.sizes.present? %>
+                      <p>Precio: <span data-hello-target="aparece"><%= product.sizes.first.price %></span> €</p>
+                  <% else %>               
+                      <p class="is-size-4"> . </p>
+                  <% end %>
+                </div>
                 <% end %>
-              </div>
-              <div class="nombre has-text-centered">
-                <h3 class="title is-4"><%= product.name %></h3>
-                <% if product.sizes.present? %>
-                    <p>Precio: <span data-hello-target="aparece"><%= product.sizes.first.price %></span> €</p>
-                <% else %>               
-                    <p class="is-size-4"> . </p>
-                <% end %>
-              </div>
-              <% end %>
-          </div> 
+            </div> 
+          <% end %>
       <% end %>
     </div>
 </div>

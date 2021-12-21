@@ -3,12 +3,7 @@
 </div>
 
 <div class="container">
-
-  <button class="button is-primary"><%= link_to 'Volver', store_product_path(@store, @product) %></button>
-  <button class="button is-primary"><%= link_to 'Modificar producto', edit_store_product_path(@store, @product) %></button>
-  <button class="button is-primary"><%= link_to 'Eliminar producto', store_product_path(@store, @product), method: :delete, data: {confirm: 'Estas seguro?'} %></button>
-  <button class="button is-primary"><%= link_to 'Nueva talla', new_store_product_size_path(@store, @product) %></button>
-
+  <%= link_to 'Volver a producto', store_product_path(@store, @product), class: 'button is-primary' %>
+  <%= link_to 'Nueva talla', new_store_product_size_path(@store, @product), class: 'button is-primary' %>
   <%= render 'products/sizes' %>
-
-  </div>
+</div>

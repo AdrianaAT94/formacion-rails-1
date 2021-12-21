@@ -1,0 +1,9 @@
+poñer orden nas miniaturas
+cambiar imagen miniatura arriba producto o clickar
+acabar categorias, filtrar
+acabar cancan
+carrito
+gema view components
+codigo slider a stimulusjs
+maquetacion de deportesplus
+breadcrums

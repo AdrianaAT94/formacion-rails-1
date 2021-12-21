@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_14_170604) do
+ActiveRecord::Schema.define(version: 2021_12_21_095446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_170604) do
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
+    t.boolean "main", default: false, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -53,6 +54,12 @@ ActiveRecord::Schema.define(version: 2021_12_14_170604) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -60,7 +67,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_170604) do
     t.bigint "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image"
+    t.string "images"
     t.string "reference"
     t.index ["store_id"], name: "index_products_on_store_id"
   end
@@ -68,12 +75,20 @@ ActiveRecord::Schema.define(version: 2021_12_14_170604) do
   create_table "sizes", force: :cascade do |t|
     t.string "name"
     t.string "reference"
+    t.string "color"
     t.string "price"
     t.string "stock"
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_sizes_on_product_id"
+  end
+
+  create_table "sliders", force: :cascade do |t|
+    t.string "name"
+    t.string "images"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "stores", force: :cascade do |t|

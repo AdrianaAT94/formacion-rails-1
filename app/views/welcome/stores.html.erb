@@ -3,13 +3,17 @@
 </div>
 
 <div class="container">
+  <%= link_to 'Volver a inicio', root_path, class: 'button is-primary' %>
 
-<table class="table is-bordered has-text-centered tiendas">
-
-   <% @stores.each do |store| %>
+   <table class="table is-bordered has-text-centered tiendas">
       <tr>
-        <th><%= link_to store.name, productos_path(store) %></th>
-    </tr>
-   <% end %>
-</table>
+         <th>Nombre</th>
+      </tr>
+
+      <% @stores.each do |store| %>
+         <tr>
+            <td><%= link_to store.name, tienda_path(store) %></td> 
+         </tr>
+      <% end %>
+   </table>
 </div>
