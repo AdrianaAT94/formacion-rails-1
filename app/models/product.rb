@@ -7,6 +7,6 @@ class Product < ApplicationRecord
     attachable.variant :thumb, resize: "100x100"
     attachable.variant :medium, resize: "300x300"
   end
-  validates :name, :reference, presence: true
+  validates :name, :sku, presence: true
   validates :images, content_type: [:png, :jpg, :jpeg]
 end

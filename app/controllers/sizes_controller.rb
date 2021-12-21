@@ -46,6 +46,6 @@ class SizesController < ApplicationController
         end
 
         def size_params
-            params.require(:size).permit(:name, :reference, :price, :stock, :state)
+            params.require(:size).permit(:name, :ean, :price, :stock, :state)
         end
 end

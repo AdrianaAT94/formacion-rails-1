@@ -3,17 +3,32 @@
 </div>
 
 <div class="container">
+  <%= link_to 'Volver a inicio', root_path, class: 'button is-primary' %>
+  <%= link_to 'Nuevo slider', new_slider_path, class: 'button is-primary' %>
 
-  <table class="table is-bordered has-text-centered tiendas">
-      <tr>
-         <th>Nombre</th>
-      </tr>
-
+  <div class="columns is-multiline is-mobile">  
       <% @sliders.each do |slider| %>
-         <tr>
-            <td>slider.name</td> 
-         </tr>
+         <% if slider.image.attached? %>    
+               <div class="column is-9-desktop is-12-tablet is-12-mobile imagen_slider">
+                  <div class="imagen has-text-centered">       
+                     <%= image_tag(slider.image, alt: slider.name) %>
+                  </div>    
+               </div>
+               <div class="column is-3-desktop is-12-tablet is-12-mobile opciones_slider">
+                  <div>
+                     <p><%= slider.name %></p>
+                  </div>
+                  <div class="opciones">
+                     <p class="is-size-6">
+                        <%= link_to 'Modificar imagen', edit_slider_path(slider) %> | 
+                        <%= link_to 'Eliminar imagen', slider_path(slider), method: :delete, data: {confirm: 'Estas seguro?'} %> |                     
+                     </p>
+                  </div>
+               </div>
+         <% end %>
       <% end %>
-   </table>
+    </div>
+
+      
 
 </div>

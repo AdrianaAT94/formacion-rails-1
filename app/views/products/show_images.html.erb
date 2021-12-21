@@ -12,7 +12,7 @@
         <% @product.images.each do |image| %>    
             <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
                 <div class="imagen has-text-centered">       
-                    <%= image_tag(image.variant(:medium), alt: 'Imagen') %>
+                    <%= image_tag(image.variant(:medium), alt: @product.name) %>
                 </div>     
                 <div class="opciones">
                    <p class="is-size-6">

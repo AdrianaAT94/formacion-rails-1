@@ -18,11 +18,11 @@
                   <% if product.images.where(main: true).count > 0 %>
                     <% product.images.each do |image| %> 
                       <% if image.main == true %>   
-                        <%= image_tag(image.variant(:medium), alt: 'Imagen') %>
+                        <%= image_tag(image.variant(:medium), alt: product.name) %>
                       <% end %>
                     <% end %>
                   <% else %>
-                      <%= image_tag(product.images.first.variant(:medium), alt: 'Imagen') %>
+                      <%= image_tag(product.images.first.variant(:medium), alt: product.name) %>
                   <% end %>
                 <% else %>
                     <%= image_tag("noimage.jpg", alt: 'Imagen') %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_21_095446) do
+ActiveRecord::Schema.define(version: 2021_12_21_134910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,20 +62,17 @@ ActiveRecord::Schema.define(version: 2021_12_21_095446) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.text "description"
     t.string "state"
     t.bigint "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "images"
-    t.string "reference"
+    t.string "sku"
     t.index ["store_id"], name: "index_products_on_store_id"
   end
 
   create_table "sizes", force: :cascade do |t|
     t.string "name"
-    t.string "reference"
-    t.string "color"
+    t.string "ean"
     t.string "price"
     t.string "stock"
     t.bigint "product_id", null: false
@@ -86,7 +83,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_095446) do
 
   create_table "sliders", force: :cascade do |t|
     t.string "name"
-    t.string "images"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

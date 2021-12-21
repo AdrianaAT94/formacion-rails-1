@@ -12,6 +12,7 @@ gem 'devise'
 gem "active_storage_variant"
 gem 'image_processing', '~> 1.2'
 gem 'active_storage_validations'
+gem 'inline_svg'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'

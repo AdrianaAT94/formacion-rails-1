@@ -1,0 +1,57 @@
+<%= form_for @slider, :enctype =>"multipart/form-data" do |f| %>
+      <% if @slider.errors.any? %>
+              <div class="columns">
+                 <div class="column" id="error_explanation">
+                    <h2><%= pluralize(@slider.errors.count, "error") %> guardando slider:</h2>
+                    <ul>
+                    <% @slider.errors.full_messages.each do |msg| %>
+                       <li><%= msg %></li>
+                    <% end %> 
+                    </ul>
+                 </div>
+              </div>
+         <% end %>   
+
+         <div class="field formulario">
+            <div class="columns">
+               <div class="column">
+                     <%= f.label :name, 'Nombre', class: 'label' %>
+               </div>
+            </div>
+            <div class="columns">
+               <div class="column">
+                     <%= f.text_field :name, class: 'input' %>
+               </div>
+            </div>  
+         </div>  
+
+         
+           
+         <div class="field formulario">
+            <div class="columns">
+                  <div class="column imagen_form">
+                     <% if @slider.image.attached? %>               
+                        <% if @slider.id == @slider.image.record_id %>
+                           <%= image_tag(@slider.image, alt: @slider.name) %>
+                        <% end %>         
+                     <% end %>
+                  </div>
+            </div>
+            <div class="columns">
+               <div class="column is-1">
+                  <%= f.label :image, 'Imagen', class: 'label' %>
+               </div>
+               <div class="column">
+                  <%= f.file_field 'image' %>
+               </div>
+            </div>  
+         </div>
+                       
+         <div class="field boton_form">
+             <div class="columns">
+                 <div class="column">
+                     <%= f.submit 'Enviar' %>
+                 </div>
+             </div>
+         </div>
+     <% end %>     

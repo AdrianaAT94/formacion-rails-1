@@ -4,6 +4,7 @@ class WelcomeController < ApplicationController
 
   def index
     @products = Product.order(created_at: :desc)
+    @sliders = Slider.order(created_at: :desc)
   end
 
   def stores

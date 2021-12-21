@@ -22,11 +22,11 @@
                      <% if @product.images.where(main: true).count > 0 %>
                         <% @product.images.each do |image| %> 
                            <% if image.main == true %>   
-                              <%= image_tag(image.variant(:medium), alt: 'Imagen') %>
+                              <%= image_tag(image.variant(:medium), alt: @product.name) %>
                            <% end %>
                         <% end %>
                      <% else %>
-                        <%= image_tag(@product.images.first.variant(:medium), alt: 'Imagen') %>
+                        <%= image_tag(@product.images.first.variant(:medium), alt: @product.name) %>
                      <% end %>
                   <% else %>
                     <%= image_tag("noimage.jpg", alt: 'Imagen') %>
@@ -35,14 +35,14 @@
                <div class="column is-12-desktop is-12-mobile miniaturas">
                   <% if @product.images.attached? %>    
                      <% @product.images.each do |image| %>           
-                        <%= image_tag(image.variant(:thumb), alt: 'Imagen') %>
+                        <%= image_tag(image.variant(:thumb), alt: @product.name) %>
                      <% end %>
                   <% end %>
                </div>
             </div>
          </div>    
          <div class="column is-6-desktop is-12-mobile producto desc has-text-left">               
-            <p class="is-size-6">Código de producto: <%= @product.reference %></p>
+            <p class="is-size-6">Código de producto: <%= @product.sku %></p>
             <p class="is-size-6">Descripción: <span class="desc_producto"><%= @product.description %></span></p>
             <%= form_for([@store, @product]) do |f| %>  
                <% if @product_sizes.present? %>
