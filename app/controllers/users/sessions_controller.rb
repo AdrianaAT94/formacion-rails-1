@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+  add_breadcrumb "Log in", :new_user_session_path
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

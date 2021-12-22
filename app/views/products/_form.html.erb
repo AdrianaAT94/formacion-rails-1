@@ -50,6 +50,21 @@
                </div>
          </div>
     </div>    
+    
+    <div class="field formulario">
+        <div class="columns is-multiline is-mobile">
+            <div class="column is-12">
+                <%= f.label :state, 'Categorias', class: 'label' %>
+            </div>
+            <div class="column is-12">
+                <div class="columns is-multiline is-mobile">
+                    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
+                        <% b.label(class: "checkbox column is-2-desktop is-4-tablet is-6-mobile") {b.check_box + b.text } %>
+                    <% end %>
+                </div>
+            </div>
+        </div>  
+    </div> 
 
     <div class="field formulario">
         <div class="columns">

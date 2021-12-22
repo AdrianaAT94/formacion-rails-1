@@ -73,6 +73,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.9.3)
       msgpack (~> 1.0)
+    breadcrumbs_on_rails (4.1.0)
+      railties (>= 5.0)
     builder (3.2.4)
     bulma-rails (0.9.2)
       sassc (~> 2.0)
@@ -233,6 +235,7 @@ DEPENDENCIES
   active_storage_validations
   active_storage_variant
   bootsnap (>= 1.4.4)
+  breadcrumbs_on_rails
   bulma-rails (~> 0.9.2)
   byebug
   capybara (>= 3.26)

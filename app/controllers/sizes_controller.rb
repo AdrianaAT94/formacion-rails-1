@@ -3,10 +3,16 @@ class SizesController < ApplicationController
     before_action :find_size, only: [:edit, :update, :delete, :destroy]
 
     def index
+        add_breadcrumb @store.name, store_products_path(@store)
+        add_breadcrumb @product.name, store_product_path(@store, @product)
+        add_breadcrumb 'Tallas', store_product_sizes_path(@store, @product)
         @product_sizes = @product.sizes.order(created_at: :desc)
     end
     
     def new
+        add_breadcrumb @store.name, store_products_path(@store)
+        add_breadcrumb @product.name, store_product_path(@store, @product)
+        add_breadcrumb 'Nueva talla', new_store_product_size_path(@store, @product)
         @size = Size.new
     end
 
@@ -20,6 +26,9 @@ class SizesController < ApplicationController
     end
 
     def edit
+        add_breadcrumb @store.name, store_products_path(@store)
+        add_breadcrumb @product.name, store_product_path(@store, @product)
+        add_breadcrumb 'Modificar talla', edit_store_product_size_path(@store, @product, @size)
     end
 
     def update  

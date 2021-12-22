@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="slider" data-controller="slideshow">
+  <div class="slider" data-controller="slideshow" data-slideshow-current-slide-class="slide--current">
     <% if @sliders.count > 0 %>
       <% @sliders.first(4).each do |slide| %>  
         <% if slide.image.attached? %>
@@ -14,7 +14,7 @@
       <% end %>
     <% else 4.times%>
       <div class="slide" data-slideshow-target="slide">
-          <%= image_tag(slide.image, alt: slide.name) %>
+            <%= image_tag("noimage.jpg", alt: 'Imagen') %>
       </div>
     <% end %>
     <div class="flecha izq is-clickable" data-action="click->slideshow#previous"><%= show_svg('chevron-double-left.svg') %></div>

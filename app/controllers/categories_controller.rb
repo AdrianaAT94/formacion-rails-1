@@ -1,68 +1,51 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :find_category, except: [:index, :new, :create]
+  add_breadcrumb "Categorías", :categories_path
 
-  # GET /categories or /categories.json
   def index
     @categories = Category.all
   end
 
-  # GET /categories/1 or /categories/1.json
   def show
   end
 
-  # GET /categories/new
-  def new
+  def new        
+    add_breadcrumb "Nueva categoría", new_category_path
     @category = Category.new
   end
 
-  # GET /categories/1/edit
   def edit
+    @category_name = 'Modificar ' + @category.name
+    add_breadcrumb @category_name, edit_category_path(@category)
   end
 
-  # POST /categories or /categories.json
   def create
     @category = Category.new(category_params)
-
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to @category, notice: "Category was successfully created." }
-        format.json { render :show, status: :created, location: @category }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+    if @category.save 
+      redirect_to categories_path
+    else
+      render 'new'
     end
-  end
+end
 
-  # PATCH/PUT /categories/1 or /categories/1.json
   def update
-    respond_to do |format|
-      if @category.update(category_params)
-        format.html { redirect_to @category, notice: "Category was successfully updated." }
-        format.json { render :show, status: :ok, location: @category }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
-    end
+    if @category.update(category_params) 
+      redirect_to categories_path
+    else
+        render 'edit'
+    end        
   end
 
-  # DELETE /categories/1 or /categories/1.json
   def destroy
     @category.destroy
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to categories_path
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
+    def find_category
       @category = Category.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def category_params
       params.require(:category).permit(:name)
     end

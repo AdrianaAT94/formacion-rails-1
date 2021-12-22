@@ -10,32 +10,32 @@
 <% if @product.state == 'publicado' %>
    <div class="container">   
       <div class="columns is-multiline is-mobile">      
-            <div class="column is-6-desktop is-12-mobile producto has-text-centered">
-               <div class="columns is-multiline is-mobile">
-                  <div class="column is-12-desktop is-12-mobile imagen">
+            <div class="column is-6-desktop is-12-mobile is-6-tablet pag producto has-text-centered">
+               <div data-controller="hello" class="columns is-multiline is-mobile">
+                  <div class="column is-12-desktop is-12-mobile is-12-tablet imagen">
                      <% if @product.images.attached? %>
                         <% if @product.images.where(main: true).count > 0 %>
                            <% @product.images.each do |image| %> 
                               <% if image.main == true %>   
-                                 <%= image_tag(image.variant(:medium), alt: @product.name) %>
+                                 <%= image_tag(image, alt: @product.name, data: {target: "hello.imageap" }) %>
                               <% end %>
                            <% end %>
                         <% else %>
-                           <%= image_tag(@product.images.first.variant(:medium), alt: @product.name) %>
+                           <%= image_tag(@product.images.first, alt: @product.name) %>
                         <% end %>
                      <% else %>
                      <%= image_tag("noimage.jpg", alt: 'Imagen') %>
-                     <% end %> 
+                     <% end %>  
                   </div>
-                  <div class="column is-12-desktop is-12-mobile miniaturas">
+                  <div class="column is-12-desktop is-12-mobile is-12-tablet miniaturas">
                      <% if @product.images.attached? %>    
                         <% @product.images.each do |image| %>           
-                           <%= image_tag(image.variant(:thumb), alt: @product.name) %>
+                           <%= image_tag(image, alt: @product.name, class: "is-clickable", data: {action: "click->hello#hola", target: "hello.image" }) %>
                         <% end %>
                      <% end %>
                   </div>
                </div>
-            </div>    
+            </div>   
             <div class="column is-6-desktop is-12-mobile producto desc has-text-left">               
                <p class="is-size-6">Código de producto: <%= @product.sku %></p>
                <p class="is-size-6">Descripción: <span class="desc_producto"><%= @product.description %></span></p>
@@ -50,7 +50,16 @@
                            <%= f.submit 'Comprar' %>        
                         </div>
                   <% end %>
-               <%end%>
+               <%end%>               
+               <% if @category_product.count > 0 %>
+                  <div>
+                     <p class="is-size-6">Categorías:
+                     <% @category_product.each do |categoria| %> 
+                        <span class="is-size-7"><%=categoria.category.name %></span>
+                     <% end %>
+                     </p>
+                  </div>
+               <% end %>
             </div>
       </div>
    </div>

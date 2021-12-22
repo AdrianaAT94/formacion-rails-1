@@ -10,14 +10,18 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "valor", "aparece", "hide"]  
+  static targets = [ "valor", "aparece", "hide", "imageap", "image"]  
   static classes = ["display"]
 
-  precios(event) {
+  precios() {
     this.apareceTarget.textContent = this.valorTarget.value
   } 
 
   menumovil(){
      this.hideTarget.classList.toggle(this.displayClass)
+  }
+
+  hola(event) {
+    this.imageapTarget.src  = event.currentTarget.src
   }
 }

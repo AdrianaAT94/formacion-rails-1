@@ -16,6 +16,11 @@
   <body>
     <%= render 'layouts/partials/menu' %>
     <section class="section">
+      <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+        <ul>
+          <%= render_breadcrumbs :tag => :li, :separator => "" %>
+        </ul>
+      </nav>
       <%= yield %>
     </section>
 

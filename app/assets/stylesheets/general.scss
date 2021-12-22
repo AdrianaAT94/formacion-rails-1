@@ -16,8 +16,11 @@
     input {
         width: 20%;
     }
-    input[type='file'] {
+    input[type='file'],input[type=checkbox], input[type=radio] {
         width: auto;
+    }
+    input[type=checkbox] {
+        margin-right: 10px;
     }
     label {
         margin-top: 1rem;
@@ -88,6 +91,22 @@
     margin-bottom: 1rem;
 }
 
+.pag.producto {
+    .imagen {
+        width: 400px !important;
+        margin: 0 auto !important;
+        img {
+            width: 100%;
+        }
+    }
+    .miniaturas {
+        img {
+            width: auto;
+            height: 150px;
+        }
+    }
+}
+
 .tiendas {
     margin-top: 1rem;
 }
@@ -127,6 +146,10 @@
     margin-top: 1%;
     .slide {
         height: 100%;
+        display: none;
+        &.slide--current {
+            display: block;
+          }          
         img {
             height: 100%;
             width: 100%;
@@ -135,7 +158,7 @@
     }
     .flecha {
         position: absolute;
-        z-index: 9999;
+        z-index: 1;
         margin-top: -16rem;
         background-color: rgba(255, 255, 255, 0.5);
         height: 50px;
@@ -151,6 +174,10 @@
 
 .menu {
     background-color: lightgray !important;
+}
+
+.breadcrumb li+li::before {
+    margin-right: 10px;
 }
 
 

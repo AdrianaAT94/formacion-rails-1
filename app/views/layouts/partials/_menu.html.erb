@@ -18,15 +18,18 @@
           <%= link_to 'Inicio', root_path %>
         </div>
         <div class="navbar-item">
-          <%= link_to 'Tiendas', tiendas_path %>
-        </div>
-        <div class="navbar-item">
           <%= link_to 'Productos', productos_path %>
         </div>
-      <% if user_signed_in? %>
+      <% if user_signed_in? %>        
         <div class="navbar-item">
+          <%= link_to 'Categorías', categories_path %>
+        </div>
+        <!--<div class="navbar-item">
           <%= link_to 'Admin', stores_path %>
-        </div>        
+        </div>-->    
+        <div class="navbar-item">
+          <%= link_to 'Admin Productos', store_path(1) %>
+        </div>    
         <div class="navbar-item">
           <%= link_to 'Slider', sliders_path %>
         </div>
