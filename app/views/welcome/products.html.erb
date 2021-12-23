@@ -1,17 +1,28 @@
 <div class="container">
-  <h2 class="subtitle is-3">Productos</h2>
+  <h1 class="title is-1">Productos</h1>
 </div>
 
 <div class="container">
-  <%= link_to 'Volver a inicio', root_path, class: 'button is-primary' %>
-  <%#= form_tag({}, {:method => :get}) do |f| %>  
-    <%#= select_tag 'categorias', options_for_select(@categories.collect{ |u| [u.name, u.id] }) %>    
-    <%#= submit_tag 'Filtrar' %>        
-  <%# end %>   
-  <%= form_for "", method: :get  do |f| %>
-    <%= f.text_field :name, class: 'input' %>
-    <%= f.submit 'Filtrar' %>
-  <% end %>               
+  <div class="columns is-multiline is-mobile">
+      <div class="column is-12">
+        <%= link_to 'Volver a inicio', root_path, class: 'button is-primary' %>
+      </div>
+  </div>
+  <% if @categories.count > 0%>
+    <%= form_for "", :html => { :class => 'form_filtro' }, :method => :get do |f| %>
+      <div class="columns is-multiline is-mobile">
+        <div class="column is-1-desktop is-3-tablet is-3-mobile">
+            <%= f.label :category_id, 'Categorías', class: 'label' %>    
+        </div>
+        <div class="column is-1-desktop is-3-tablet is-3-mobile select_form">
+          <%= f.select 'category_id', options_for_select(@categories.collect{ |u| [u.name, u.id] }) %>  
+        </div>
+        <div class="column is-1-desktop is-3-tablet is-3-mobile boton_form">
+            <%= f.submit 'Enviar' %>
+        </div>
+      </div>
+    <% end %>          
+  <% end %>
 </div>
 
 <div class="container productos">

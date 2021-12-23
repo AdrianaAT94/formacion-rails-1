@@ -15,8 +15,8 @@
          </div>           
          <div class="opciones">
             <p class="is-size-6">
-               <%= link_to 'Modificar talla', edit_store_product_size_path(@store, @product, size) %> | 
-               <%= link_to 'Eliminar talla', store_product_size_path(@store, @product, size), method: :delete, data: {confirm: 'Estas seguro?'} %>
+               <%= link_to 'Modificar talla', edit_product_size_path(@product, size) %> | 
+               <%= link_to 'Eliminar talla', product_size_path(@product, size), method: :delete, data: {confirm: 'Estas seguro?'} %>
             </p>
          </div>
          <hr style="background-color: black;">

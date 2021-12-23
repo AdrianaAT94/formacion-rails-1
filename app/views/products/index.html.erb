@@ -1,12 +1,30 @@
 <div class="container">
-  <h1 class="title is-1">Productos de <%= @store.name %></h1>
+  <h1 class="title is-1">Productos</h1>
 </div>
 
 <div class="container">
-  <%= link_to 'Volver a tiendas', stores_path, class: 'button is-primary' %>
-  <%= link_to 'Nuevo producto', new_store_product_path(@store), class: 'button is-primary' %>
+  <div class="columns is-multiline is-mobile">
+      <div class="column is-12">
+        <%= link_to 'Nuevo producto', new_product_path, class: 'button is-primary' %>
+      </div>
+  </div>
+  <% if @categories.count > 0%>
+    <%= form_for "", :html => { :class => 'form_filtro' }, :method => :get do |f| %>
+      <div class="columns is-multiline is-mobile">
+        <div class="column is-1-desktop is-3-tablet is-3-mobile">
+            <%= f.label :category_id, 'Categorías', class: 'label' %>    
+        </div>
+        <div class="column is-1-desktop is-3-tablet is-3-mobile select_form">
+          <%= f.select 'category_id', options_for_select(@categories.collect{ |u| [u.name, u.id] }) %>  
+        </div>
+        <div class="column is-1-desktop is-3-tablet is-3-mobile boton_form">
+            <%= f.submit 'Enviar' %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>
 
 <div class="container productos">
-  <%= render 'stores/products' %>
+  <%= render 'products' %>
 </div>

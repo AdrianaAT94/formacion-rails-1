@@ -20,30 +20,36 @@
         <div class="navbar-item">
           <%= link_to 'Productos', productos_path %>
         </div>
-      <% if user_signed_in? %>        
-        <div class="navbar-item">
-          <%= link_to 'Categorías', categories_path %>
-        </div>
-        <!--<div class="navbar-item">
-          <%= link_to 'Admin', stores_path %>
-        </div>-->    
-        <div class="navbar-item">
-          <%= link_to 'Admin Productos', store_path(1) %>
-        </div>    
-        <div class="navbar-item">
-          <%= link_to 'Slider', sliders_path %>
-        </div>
-        <div class="navbar-item">
-          <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
-        </div>
-      <% else %>
-        <div class="navbar-item">
-          <%= link_to 'Log in', new_user_session_path %>
-        </div>
-        <div class="navbar-item">
-          <%= link_to 'Registro', new_user_registration_path %>
-        </div>
-      <%end%>
+        <% if user_signed_in?%> 
+          <% if current_user.is_admin? %>       
+            <div class="navbar-item">
+              <%= link_to 'Categorías', categories_path %>
+            </div> 
+            <div class="navbar-item">
+              <%= link_to 'Admin Productos', products_path %>
+            </div>    
+            <div class="navbar-item">
+              <%= link_to 'Slider', sliders_path %>
+            </div>
+          <% end %>
+            <div class="navbar-item">
+              <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+            </div>
+        <% else %>
+          <div class="navbar-item">
+            <%= link_to 'Log in', new_user_session_path %>
+          </div>
+          <div class="navbar-item">
+            <%= link_to 'Registro', new_user_registration_path %>
+          </div>
+        <%end%>
     </div>
+    <% if user_signed_in? %>      
+      <div class="navbar-end">
+        <div class="navbar-item cesta">
+          <%= link_to show_svg('shopping-bag.svg'), cart_path %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </nav>

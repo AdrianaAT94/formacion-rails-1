@@ -16,7 +16,7 @@
                         <% if @product.images.where(main: true).count > 0 %>
                            <% @product.images.each do |image| %> 
                               <% if image.main == true %>   
-                                 <%= image_tag(image, alt: @product.name, data: {target: "hello.imageap" }) %>
+                                 <%= image_tag(image, alt: @product.name, data: {"hello-target": "imageap" }) %>
                               <% end %>
                            <% end %>
                         <% else %>
@@ -29,27 +29,13 @@
                   <div class="column is-12-desktop is-12-mobile is-12-tablet miniaturas">
                      <% if @product.images.attached? %>    
                         <% @product.images.each do |image| %>           
-                           <%= image_tag(image, alt: @product.name, class: "is-clickable", data: {action: "click->hello#hola", target: "hello.image" }) %>
+                           <%= image_tag(image, alt: @product.name, class: "is-clickable", data: {action: "click->hello#change_image", target: "hello.image" }) %>
                         <% end %>
                      <% end %>
                   </div>
                </div>
             </div>    
-            <div class="column is-6-desktop is-12-mobile producto desc has-text-left">               
-               <p class="is-size-6">Código de producto: <%= @product.sku %></p>
-               <p class="is-size-6">Descripción: <span class="desc_producto"><%= @product.description %></span></p>
-               <%= form_tag({}, {:method => :get}) do |f| %>  
-                  <% if @product_sizes.present? %>
-                     <div data-controller="hello" class="field formulario">            
-                           <%= label_tag :name, 'Talla' %>
-                           <%= select_tag 'sizes', options_for_select(@product_sizes.collect{ |u| [u.name, u.price] }), data: {action: "change->hello#precios", target: "hello.valor" } %>
-                           <p>Precio: <span data-hello-target="aparece"><%= @product_sizes.first.price %></span> €</p>
-                        </div>
-                        <div class="field boton_form">
-                           <%= submit_tag 'Comprar' %>        
-                        </div>
-                  <% end %>
-               <%end%>
+            <div class="column is-6-desktop is-12-mobile producto desc has-text-left">    
                <% if @category_product.count > 0 %>
                   <div>
                      <p class="is-size-6">Categorías:
@@ -58,7 +44,23 @@
                      <% end %>
                      </p>
                   </div>
-               <% end %>
+               <% end %>           
+               <p class="is-size-6">Código de producto: <%= @product.sku %></p>
+               <p class="is-size-6">Descripción: <span class="desc_producto"><%= @product.description %></span></p>
+               <%= form_tag({:controller => "welcome", :action => "add_to_cart"}) do %>  
+                  <% if @product_sizes.present? %>
+                     <div data-controller="hello" class="field formulario">            
+                        <%= label_tag :name, 'Talla' %>
+                        <%= select_tag 'sizes', options_for_select(@product_sizes.collect{ |u| [u.name, [u.id, u.price.to_f]] }), data: {action: "change->hello#precios", "hello-target": "valor" } %>
+                        <p>Precio: <span data-hello-target="aparece"><%= @product_sizes.first.price %></span> €</p>
+                        <%= hidden_field_tag :size_id, @product_sizes.first.id, data: {"hello-target": "aparece2"} %>
+                     </div>
+                     <div class="field boton_form">
+                        <%= submit_tag 'Añadir al carro' %>      
+                        <%= submit_tag 'Comprar ahora', name: 'buy_now' %>       
+                     </div>
+                  <% end %>
+               <%end%>
             </div>
       </div>
    </div>

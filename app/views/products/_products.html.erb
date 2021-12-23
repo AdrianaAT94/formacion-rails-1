@@ -1,7 +1,7 @@
 <div class="columns is-multiline is-mobile">
-   <% @store_products.each do |product| %>
+   <% @products.each do |product| %>
       <div class="column is-3-desktop is-6-tablet is-12-mobile producto">
-         <%= link_to store_product_path(@store, product) do %>
+         <%= link_to product_path(product) do %>
             <div class="imagen has-text-centered">
                 <% if product.images.attached? %>
                   <% if product.images.where(main: true).count > 0 %>

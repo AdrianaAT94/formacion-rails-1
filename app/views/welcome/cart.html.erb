@@ -1,0 +1,16 @@
+<div class="container">
+   <h1 class="title is-1"> Carro</h1>
+</div>
+
+<div class="container">
+  <% if @cart.present? %>
+    <%= form_tag({:controller => "welcome", :action => "buy_cart"}) do %> 
+      <div class="field boton_form">
+          <%= submit_tag 'Comprar' %>        
+      </div>
+    <% end %>
+  <% else %>
+    <p> Carro vacío </p>
+  <% end %>  
+   <%= link_to 'Seguir comprando', productos_path, class: 'button is-primary' %>
+</div>

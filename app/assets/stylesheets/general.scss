@@ -180,6 +180,22 @@
     margin-right: 10px;
 }
 
+.form_filtro {
+    margin-top: 1.2rem;
+}
+
+.select_form select {
+    padding: 0.6rem;
+}
+
+.cesta {
+    height: 50px;
+    width: 50px;
+    svg {
+        width: 100%;
+    }
+}
+
 
 @media screen and (max-width: 1023px) {
     

@@ -1,9 +1,9 @@
 <div class="container">
-  <h1 class="title is-1">Nuevo producto de <%= @store.name %></</h1>
+  <h1 class="title is-1">Nuevo producto</h1>
 </div>
 
 <div class="container">
-  <%= link_to 'Volver a tienda', store_products_path(@store), class: 'button is-primary' %>
+  <%= link_to 'Volver a tienda', products_path, class: 'button is-primary' %>
 
   <%= render 'form' %>
 
