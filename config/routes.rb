@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   get 'order', to: 'welcome#order'
   post 'productos/:id/add_to_cart', to: 'welcome#add_to_cart'
   post 'cart/buy_cart', to: 'welcome#buy_cart'
-
+  delete 'cart', to: 'welcome#delete_cart_item', as: :delete_cart_item  
+  post 'cart', to: 'welcome#modify_items', as: :modify_items
+  
 
   match '/404', via: :all, to: 'errors#not_found'
   match '/422', via: :all, to: 'errors#unprocessable_entity'

@@ -14,10 +14,9 @@ export default class extends Controller {
   static classes = ["display"]
 
   precios() {
-    var valores = this.valorTarget.value
-    valores = valores.split(",")
+    var valores = this.valorTarget.value.split(",")
     this.apareceTarget.textContent = valores[1].replace(']', '')
-    this.aparece2Target.textContent = valores[0].replace('[', '')
+    this.aparece2Target.value = valores[0].replace('[', '')
   } 
 
   menumovil(){

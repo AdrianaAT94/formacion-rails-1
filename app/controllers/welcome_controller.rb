@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   skip_before_action :set_breadcrumbs, only: [:index] 
   before_action :oculto, only: [:product]
   before_action :no_order, only: [:order]  
-  
+
   def index
     @products = Product.order(created_at: :desc)
     @sliders = Slider.order(created_at: :desc)
@@ -32,24 +32,59 @@ class WelcomeController < ApplicationController
   end
 
   def add_to_cart 
-    @cart = Cart.where(user_id: current_user)      
-    if @cart.present?
-      render plain: params
-    else
+    @cart = Cart.where(user_id: current_user).first     
+    unless @cart.present?
       @cart = Cart.create(user_id: current_user.id)
-      render plain: '2'
+    end
+    @line_item = LineItem.where(product_id: params[:id], size_id: params[:size_id], cart_id: @cart.id).first
+    if @line_item.present?
+      @line_item.update_attribute(:quantity, @line_item.quantity + 1)
+    else
+      @line_item = LineItem.create(product_id: params[:id], size_id: params[:size_id], cart_id: @cart.id, quantity: 1)
     end
     
-    # if params[:buy_now].present?
-    #   redirect_to cart_path
-    # else
-    #   redirect_back fallback_location: root_path
-    # end
+    if params[:buy_now].present?
+      redirect_to cart_path
+    else
+      redirect_back fallback_location: root_path
+    end
   end 
 
-    def buy_cart 
-      redirect_to order_path
-    end 
+  def modify_items
+    @cart = Cart.where(user_id: current_user).first     
+    if @cart.present?
+      @line_item = LineItem.find(item_id)
+      if @line_item.present?
+        if params['operation'] == 'plus'
+          size = Size.where(id: @line_item.size_id).first
+          if @line_item.quantity + 1 < size.stock
+            @line_item.update_attribute(:quantity, @line_item.quantity + 1)
+            redirect_to cart_path
+          end
+        elsif params['operation'] == 'minus'
+          if @line_item.quantity > 1
+            @line_item.update_attribute(:quantity, @line_item.quantity - 1)
+            redirect_to cart_path
+          end
+        end
+      end
+    end
+  end
+
+  def delete_cart_item    
+    @cart = Cart.where(user_id: current_user).first     
+    if @cart.present?
+      @line_item = LineItem.find(item_id)
+      if @line_item.present?
+        @line_item.destroy
+        redirect_to cart_path
+      end
+    end
+  end
+
+  def buy_cart 
+    redirect_to order_path
+  end 
 
   private
       def oculto
@@ -68,7 +103,7 @@ class WelcomeController < ApplicationController
         params[:category_id]
       end
 
-      def cart_item_params
-        params[:category_id]
+      def item_id
+          params[:format]
       end
 end

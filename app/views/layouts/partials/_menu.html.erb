@@ -46,8 +46,31 @@
     </div>
     <% if user_signed_in? %>      
       <div class="navbar-end">
-        <div class="navbar-item cesta">
-          <%= link_to show_svg('shopping-bag.svg'), cart_path %>
+        <div class="navbar-item cesta">          
+          <% @cart = Cart.where(user_id: current_user).first %>
+          <% if @cart.present? %>
+            <% @line_items = LineItem.where(cart_id: @cart.id).all %>
+            <% if @line_items.count > 0 %>   
+              <% total = 0 %>
+              <% @line_items.each do |item| %>    
+                <% total = total + item.quantity %>
+              <% end %>
+              <%= link_to cart_path do %>  
+                <div class="columns is-vcentered">
+                  <div class="column is-2">
+                    <%= total %>
+                  </div>
+                  <div class="column is-10">
+                    <%= show_svg('shopping-bag-full.svg') %>
+                  </div>
+                </div>
+              <% end %>
+            <% else %>
+              <%= link_to show_svg('shopping-bag.svg'), cart_path %>
+            <% end %>
+          <% else %>
+            <%= link_to show_svg('shopping-bag.svg'), cart_path %>
+          <% end %>
         </div>
       </div>
     <% end %>

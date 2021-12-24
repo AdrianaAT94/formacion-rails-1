@@ -194,6 +194,34 @@
     svg {
         width: 100%;
     }
+    .column{
+        padding: 0.4rem !important;
+    }
+}
+
+.delete_item svg{
+    width: 50px;
+}
+
+.modify_quantity svg {
+    width: 20px;
+}
+
+.item_cart {
+    border: 1px solid;
+    margin-top: 0.8rem;
+    margin-right: 1rem;
+    padding: 1rem !important;
+    .enl a, .enl a:hover, .enl a:focus, .enl a:active {
+        color: #363636 !important;
+    }
+}
+
+.desc_item .column{
+    padding-top: 0 !important;
+}
+.empty_cart{
+    margin-top: 0.8rem !important;
 }
 
 
