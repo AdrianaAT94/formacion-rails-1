@@ -4,84 +4,85 @@
 
 <div class="container">
   <% total = 0 %>
-  <% @cart = Cart.where(user_id: current_user).first %>
-  <% if @cart.present? %>
-    <% @line_items = LineItem.where(cart_id: @cart.id).all %>
-    <% if @line_items.count > 0 %>
-      <%= form_tag({:controller => "welcome", :action => "buy_cart"}) do %> 
-        <div class="columns is-multiline is-mobile">
-          <% @line_items.each do |item| %>
-            <% @product = Product.find(item.product_id) %>  
-            <% @size = Size.find(item.size_id) %>  
-            <div class="column item_cart is-6-desktop is-8-tablet is-12-mobile">
-              <div class="columns is-multiline is-mobile">
-                <div class="column enl is-2">
-                  <% if @product.images.where(main: true).count > 0 %>
-                    <% @product.images.each do |image| %> 
-                      <% if image.main == true %>
-                        <%= link_to producto_path(@product) do %>
-                          <%= image_tag(image.variant(:thumb), alt: @product.name) %>
-                        <% end %>
+  <% if @line_items.count > 0 %>
+    <%= form_tag({:controller => "welcome", :action => "buy_cart"}) do %> 
+      <div class="columns is-multiline is-mobile">
+        <% @line_items.each do |item| %>
+          <% @product = Product.find(item.product_id) %>  
+          <% @size = Size.find(item.size_id) %>  
+          <div class="column item_cart is-6-desktop is-8-tablet is-12-mobile">
+            <div class="columns is-multiline is-mobile">
+              <div class="column enl is-2">
+                <% if @product.images.where(main: true).count > 0 %>
+                  <% @product.images.each do |image| %> 
+                    <% if image.main == true %>
+                      <%= link_to producto_path(@product) do %>
+                        <%= image_tag(image.variant(:thumb), alt: @product.name) %>
                       <% end %>
-                    <% end %>
-                  <% else %>
-                    <%= link_to producto_path(@product) do %>
-                      <%= image_tag(@product.images.first.variant(:thumb), alt: @product.name) %>
                     <% end %>
                   <% end %>
-                </div>
-                <div class="column is-10 desc_item">
-                  <div class="columns is-multiline is-mobile">
-                    <div class="column enl is-12">
-                      <%= link_to producto_path(@product) do %>
-                        <h3 class="title is-3"><%= @product.name %></h3>
-                      <% end %>
-                    </div>
-                    <div class="column enl is-12">
-                      <%= link_to producto_path(@product) do %>
-                        <p><span class="subtitle is-5">Talla: </span> <span class="is-size-6"><%= @size.name %></span></p>
-                      <% end %>
-                    </div>
-                    <div class="column enl is-12">
-                      <%= link_to producto_path(@product) do %>
-                        <p><span class="subtitle is-5">Precio:</span> <span class="is-size-6"><%= @size.price %> € </span></p>
-                      <% end %>
-                    </div>
-                    <div class="column is-12">
-                        <p><span class="subtitle is-5">Cantidad:</span> <span class="is-size-6">
-                          <%= link_to show_svg('minus.svg'), modify_items_path(item, operation: 'minus'), method: :post, class: 'modify_quantity' %>
-                          <%= item.quantity %>
-                          <%= link_to show_svg('plus.svg'), modify_items_path(item, operation: 'plus'), method: :post, class: 'modify_quantity' %>
-                        </span></p>      
-                   </div>
-                    <div class="column is-12">
-                        <div class="columns is-multiline is-mobile">
-                          <div class="column is-6">                  
-                            <p><span class="subtitle is-5">Subtotal:</span> <span class="is-size-6"><%= @size.price * item.quantity%> € </span></p>
-                          </div>
-                          <div class="column is-6 has-text-right">
-                            <%= link_to show_svg('trash.svg'), delete_cart_item_path(item), method: :delete, data: {confirm: 'Estas seguro?'}, class: 'delete_item' %>
-                          </div>
+                <% else %>
+                  <%= link_to producto_path(@product) do %>
+                    <%= image_tag(@product.images.first.variant(:thumb), alt: @product.name) %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="column is-10 desc_item">
+                <div class="columns is-multiline is-mobile">
+                  <div class="column enl is-12">
+                    <%= link_to producto_path(@product) do %>
+                      <h3 class="title is-3"><%= @product.name %></h3>
+                    <% end %>
+                  </div>
+                  <div class="column enl is-12">
+                    <%= link_to producto_path(@product) do %>
+                      <p><span class="subtitle is-5">Talla: </span> <span class="is-size-6"><%= @size.name %></span></p>
+                    <% end %>
+                  </div>
+                  <div class="column enl is-12">
+                    <%= link_to producto_path(@product) do %>
+                      <p><span class="subtitle is-5">Precio:</span> <span class="is-size-6"><%= @size.price %> € </span></p>
+                    <% end %>
+                  </div>
+                  <div class="column is-12">
+                      <p><span class="subtitle is-5">Cantidad:</span> <span class="is-size-6">
+                        <%= link_to show_svg('minus.svg'), modify_items_path(item, operation: 'minus'), method: :post, class: 'modify_quantity' %>
+                        <% if item.quantity > @size.stock 
+                            item.update_attribute(:quantity, @size.stock)
+                          end %>
+                        <%= item.quantity %>
+                        <%= link_to show_svg('plus.svg'), modify_items_path(item, operation: 'plus'), method: :post, class: 'modify_quantity' %>
+                      </span></p>      
+                  </div>
+                  <div class="column is-12">
+                      <div class="columns is-multiline is-mobile">
+                        <div class="column is-6">                  
+                          <p><span class="subtitle is-5">Subtotal:</span> <span class="is-size-6"><%= @size.price * item.quantity%> € </span></p>
                         </div>
-                        <% total = total + (@size.price * item.quantity) %>
-                    </div>
+                        <div class="column is-6 has-text-right">
+                          <%= link_to show_svg('trash.svg'), delete_cart_item_path(item), method: :delete, data: {confirm: 'Estas seguro?'}, class: 'delete_item' %>
+                        </div>
+                      </div>
+                      <% total = total + (@size.price * item.quantity) %>
                   </div>
                 </div>
               </div>
             </div>
-          <% end %>
-        </div>
-        <div class="columns is-multiline is-mobile">    
-            <div class="column has-text-right is-6-desktop is-8-tablet is-12-mobile">
-                <p><span class="subtitle is-5"><strong>Total:</strong> <%= total %> € </span></p>
-            </div>
-        </div>    
-        <div class="columns is-multiline is-mobile">
-          <div class="field boton_form">
-              <%= submit_tag 'Comprar' %>        
           </div>
+        <% end %>
+      </div>
+      <div class="columns is-multiline is-mobile">    
+          <div class="column has-text-right is-6-desktop is-8-tablet is-12-mobile">
+              <p><span class="subtitle is-5"><strong>Total:</strong> <%= total %> € </span></p>
+                <%= hidden_field_tag :cart_id, @cart.id %>
+                <%= hidden_field_tag :price_total, total %>
+          </div>
+      </div>    
+      <div class="columns is-multiline is-mobile">
+        <div class="field boton_form">
+            <%= submit_tag 'Comprar' %>        
         </div>
-      <% end %>
+      </div>
     <% end %>
   <% else %>
     <div class="columns empty_cart is-multiline is-mobile">

@@ -20,6 +20,9 @@
         <div class="navbar-item">
           <%= link_to 'Productos', productos_path %>
         </div>
+        <div class="navbar-item">
+          <%= link_to 'Pedidos', pedidos_path %>
+        </div>
         <% if user_signed_in?%> 
           <% if current_user.is_admin? %>       
             <div class="navbar-item">

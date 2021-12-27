@@ -2,7 +2,6 @@ class WelcomeController < ApplicationController
   skip_before_action :authenticate_user!, except: [:add_to_cart, :buy_cart]
   skip_before_action :set_breadcrumbs, only: [:index] 
   before_action :oculto, only: [:product]
-  before_action :no_order, only: [:order]  
 
   def index
     @products = Product.order(created_at: :desc)
@@ -19,16 +18,32 @@ class WelcomeController < ApplicationController
     add_breadcrumb "Productos", productos_path
     @product = Product.find(product_id)
     add_breadcrumb @product.name, producto_path
-    @product_sizes = @product.sizes.order(created_at: :desc)
+    @product_sizes = @product.sizes.where("stock > 0").order(created_at: :desc)
     @category_product = @product.category_products.all
   end
 
   def cart
     add_breadcrumb "Carro", cart_path
+    @cart = Cart.where(user_id: current_user).first     
+    if @cart.present?
+      @line_items = LineItem.where(cart_id: @cart.id).order(created_at: :desc)
+    end
+  end
+
+  def orders
+    add_breadcrumb "Pedidos", pedidos_path
   end
 
   def order
     add_breadcrumb "Pedido", order_path
+    @order = Order.find(order_id)
+    if current_user.id == @order.user_id
+      if @order.present?
+        @line_items = LineItem.where(order_id: @order.id).order(created_at: :desc)
+      end
+    else
+      redirect_to cart_path
+    end
   end
 
   def add_to_cart 
@@ -57,7 +72,7 @@ class WelcomeController < ApplicationController
       if @line_item.present?
         if params['operation'] == 'plus'
           size = Size.where(id: @line_item.size_id).first
-          if @line_item.quantity + 1 < size.stock
+          if @line_item.quantity + 1 <= size.stock
             @line_item.update_attribute(:quantity, @line_item.quantity + 1)
             redirect_to cart_path
           end
@@ -82,8 +97,24 @@ class WelcomeController < ApplicationController
     end
   end
 
-  def buy_cart 
-    redirect_to order_path
+  def buy_cart    
+    @cart = Cart.where(user_id: current_user).first     
+    if @cart.present?
+      @order = Order.create(user_id: current_user.id)
+      @line_items = LineItem.where(cart_id: @cart.id).order(created_at: :desc)  
+      if @line_items.count > 0
+        @line_items.each do |item|
+          @size = Size.find(item.size_id)
+          if @size.stock >= item.quantity
+            item.update(cart_id: nil, order_id: @order.id)
+            @size.update_attribute(:stock, @size.stock-item.quantity)
+          end
+        end
+        @cart.destroy
+        @order.update_attribute(:total, price_total)
+      end
+      redirect_to @order
+    end    
   end 
 
   private
@@ -99,11 +130,19 @@ class WelcomeController < ApplicationController
         params[:id]
       end
 
+      def order_id
+        params[:id]
+      end
+
       def category_id
         params[:category_id]
       end
 
       def item_id
           params[:format]
+      end
+
+      def price_total
+          params[:price_total]
       end
 end

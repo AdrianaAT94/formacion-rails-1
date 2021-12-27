@@ -1,0 +1,14 @@
+<div class="container">
+   <h1 class="title is-1"> Pedidos</h1>
+</div>
+
+<div class="container pedidos">
+    <% @orders = Order.where(user_id: current_user).order(created_at: :desc) %>
+    <% if @orders.count > 0 %>
+        <% @orders.each do |order| %>
+            <%= link_to order_path(order) do %>
+                <h2> Pedido <%= order.created_at %></h2>
+            <% end %>
+        <% end %>
+    <% end %>
+</div>
